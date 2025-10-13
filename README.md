@@ -44,11 +44,12 @@
 推荐服务器环境：PHP 7.3+ MYSQL5.6 + nginx
 
 本系统采用PHP的Thinkphp 6框架开发。
-1、导入目录里面的install.sql导入到mysql
-2、修改目录里面的.env文件
-3、打开后台 域名/admin/login/index 登录 
+* 1、导入目录里面的install.sql导入到mysql
+* 2、修改目录里面的.env文件
+* 3、打开后台 域名/admin/login/index 登录 
 
 安装教程：https://www.ohyu.cn/index/help/detail/id/68
+
 
 
 
