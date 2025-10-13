@@ -1,0 +1,120 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layuiAdmin 商品列表 iframe 框</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+</head>
+<body>
+	
+  <div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+		<input type="hidden" name="id" id="id" value="" />
+	  <div class="layui-form-item">
+		  <label class="layui-form-label">分类名称</label>
+		  <div class="layui-input-inline">
+			  <input type="text" name="title" id="title" value="{$title1}"  placeholder="分类名称" autocomplete="off" class="layui-input">
+		  </div>
+	  </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">上级分类</label>
+          <div class="layui-input-block">
+              <div class="layui-inline">
+                  <div class="layui-form-mid layui-word-aux">{$title2}</div>
+              </div>
+              <div class="layui-inline">
+                  <div class="layui-form-mid layui-word-aux">{$title3}</div>
+              </div>
+              <!--<div class="layui-inline">-->
+                  <!--<div class="layui-form-mid layui-word-aux">不是必选，可以为空</div>-->
+              <!--</div>-->
+          </div>
+      </div>
+
+  <div class="layui-form-item">
+      <label class="layui-form-label">分类图片</label>
+      <div class="layui-input-inline">
+          <input type="text" name="img" id="img" value="{$data.img}"  placeholder="请上传商品图片" autocomplete="off" class="layui-input" >
+          <img src="{$data.img}" id="imgx1" style="width:100px;">
+      </div>
+      <button style="float: left;" type="button" class="layui-btn" id="layuiadmin-upload-useradmin">上传图片</button>
+  </div>
+
+
+  <div class="layui-form-item" lay-filter="status">
+      <label class="layui-form-label">分类状态</label>
+      <div class="layui-input-block">
+        <input type="radio" name="status" id="status" {if condition="$data.status == 1"} checked {/if} value="1" title="显示">
+        <input type="radio" name="status" id="status" {if condition="$data.status == 2"} checked {/if} value="2" title="不显示">
+      </div>
+    </div>
+
+
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-front-submit" id="LAY-user-front-submit" value="确认">
+    </div>
+  </div>
+
+  <script src="/admin/layuiadmin/layui/layui.js"></script>
+  <script>
+
+  layui.config({
+    base: '/admin/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form', 'upload', 'util','layer'], function(){
+    var $ = layui.$
+        , layer = layui.layer
+    ,form = layui.form
+    ,upload = layui.upload;
+
+	upload.render({
+    elem: '#layuiadmin-upload-useradmin' //绑定元素
+    ,url: "{:url('admin/Index/upload')}" //上传接口
+	,ext: 'jpg|png|gif'//限制文件
+    ,done: function(res){
+      //上传完毕回调
+	  $(this.item).prev("div").children("input").val(res.filename)
+	 // document.getElementById('img').value = res.filename;
+	  layer.msg("上传成功");
+    }
+    ,error: function(){
+      //请求异常回调
+    }
+  });
+
+      form.on('select(superior_id)', function (data) {
+          var repirName = data.value;
+          $.ajax({
+              type: "post",
+              data: {id: repirName},
+              url: "/admin/Shop/set_class",
+              success: function (data) {
+                  console.log(data);
+                  var data=data.data;
+                  var str = "<option value=''>---请选择---</option>";
+                  for (var i = 0; i < data.length; i++) {
+                      var json = data[i];
+                      str += '<option value="' + json.id + '">' + json.title + '</option>';
+                  }
+                  $("#superior_id_to").html(str);				//第二级select标签的ID
+                  form.render('select');
+              }
+          });
+      });
+
+
+
+
+  })
+
+ 
+  </script>
+</body>
+</html>

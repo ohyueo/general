@@ -1,0 +1,262 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>管理</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/admin/css/u-ui.css" media="all">
+</head>
+<style>
+    .tups{
+        position: relative;
+        width:100px;height:100px;
+        margin-right: 10px;
+    }
+    .tudel{
+        width: 40px;
+        height: 20px;
+        background: #FE5C14;
+        font-size: 12px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 20px;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        cursor:pointer;
+    }
+    .xuanval{
+        width:90%;
+        height: 36px;
+        color: #333333;
+        border:1px solid  #EEEEEE;
+        outline: none;
+        border-radius: 4px;
+        text-indent: 2px;
+        background: #FFFFFF;
+        display: block!important;
+    }
+</style>
+<body>
+
+<div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+    <input type="hidden" name="id" id="id" value="" />
+    <input type="hidden" name="img" id="img" value="" />
+    <input type="hidden" name="images" id="images" value="" />
+
+    <div class="layui-row layui-form-item">
+        <div class="layui-col-lg6">
+            <label class="layui-form-label">列表标题</label>
+            <div class="layui-input-inline">
+                <input type="text" name="title" id="title" lay-verify="required"  placeholder="列表标题" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-col-lg6">
+            <label class="layui-form-label">模块名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="model" id="model" lay-verify="required"  placeholder="模块名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row layui-form-item">
+        <div class="layui-col-lg6">
+            <label class="layui-form-label">方法名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="actions" id="actions" lay-verify="required"  placeholder="方法名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-col-lg6">
+            <label class="layui-form-label">数据表名称</label>
+            <div class="layui-input-inline">
+                <input type="text" name="table" id="table" value=""  placeholder="数据表名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-row layui-form-item">
+        <div class="layui-col-lg6">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-inline">
+                <input type="text" name="beizhus" id="beizhus"  placeholder="备注" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-col-lg6">
+            <label class="layui-form-label">一级菜单</label>
+            <div class="layui-input-inline">
+                <select name="navid" lay-verify="required"  id="navid" lay-search>
+                    <option value=""></option>
+                    {volist name="navlist" id="item"}
+                    <option value="{$item.id}">{$item.name}</option>
+                    {/volist}
+                </select>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="layui-row layui-form-item">
+        <div class="layui-col-lg6">
+            <label class="layui-form-label">生成权限</label>
+            <div class="layui-input-inline">
+                <select name="role_type" lay-verify="required"  id="role_type" lay-search>
+                    <option value=""></option>
+                    <option value="1">是</option>
+                    <option value="2">否</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-col-lg6">
+            <label class="layui-form-label">导出功能</label>
+            <div class="layui-input-inline">
+                <input type="radio" name="daochu" value="1" title="是">
+                <input type="radio" name="daochu" value="2" title="否">
+            </div>
+        </div>
+    </div>
+
+
+    <div style="padding:10px 30px;">
+        <div class="u-flex u-row-between">
+            <div>
+                <button onclick="addlist()" type="button" class="layui-btn layui-btn-sm"> <i class="layui-icon">&#xe654;</i>添加自定义字段</button>
+            </div>
+            <!--<div>-->
+            <!--<button type="button" class="layui-btn layui-btn-normal layui-btn-sm" onclick='return getCheckBoxVal()'>提交保存</button>-->
+            <!--</div>-->
+        </div>
+
+        <table class="layui-table">
+            <thead>
+            <tr>
+                <th>字段名称</th>
+                <th>字段类型</th>
+                <th>字段长度</th>
+                <th>默认值</th>
+                <th>表单类型</th>
+                <th>表单值</th>
+                <th>备注</th>
+                <th>搜索</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody id="centxx">
+            {volist name="list" id="item"}
+            <tr>
+                <input type="hidden" name="fid[]" value="{$item['id']}" />
+                <td>
+                    <input type="text" class="layui-input" name="name[]" placeholder="请输入自定义字段名称" value="{$item['name']}"/>
+                </td>
+                <td>
+                    <select class="form-control input-medium" name="type[]">
+                        <option value="1" {if $item['type'] == 1} selected {/if}>varChar</option>
+                        <option value="2" {if $item['type'] == 2} selected {/if}>Int</option>
+                        <option value="3" {if $item['type'] == 3} selected {/if}>Text</option>
+                        <option value="4" {if $item['type'] == 4} selected {/if}>Decimal</option>
+                        <option value="5" {if $item['type'] == 5} selected {/if}>Date</option>
+                        <option value="6" {if $item['type'] == 6} selected {/if}>DateTime</option>
+                    </select>
+                </td>
+                <td  style="text-align:center;">
+                    <div class="xuan2"><input type="text" name="length[]" class="inputx layui-input" placeholder="长度" value="{$item['length']}"/></div>
+                </td>
+                <td  style="text-align:center;">
+                    <div class="xuan2"><input type="text" name="default[]" class="inputx layui-input" placeholder="默认值" value="{$item['default']}"/></div>
+                </td>
+                <td>
+                    <select class="form-control input-medium" name="style[]">
+                        <option value="1" {if $item['style'] == 1} selected {/if}>文本框</option>
+                        <option value="2" {if $item['style'] == 2} selected {/if}>单选框</option>
+                        <option value="3" {if $item['style'] == 3} selected {/if}>上传图片</option>
+                        <option value="4" {if $item['style'] == 4} selected {/if}>富文本</option>
+                    </select>
+                </td>
+                <td style="text-align:center;">
+                    <div class="xuan2"><input type="text" name="val[]" class="inputx layui-input" placeholder="表单值，多个用,隔开" value="{$item['val']}"/></div>
+                </td>
+                <td style="text-align:center;">
+                    <input type="text" name="beizhu[]" class="layui-input" placeholder="备注" style="width:70px;text-align:center;text-indent:0px;" value="{$item['beizhu']}"/>
+                </td>
+                <td style="text-align:center;">
+                    <label class="checkbox">
+                        <input type="checkbox" name="search[]" lay-ignore {if $item['search'] == 1} checked {/if}>
+                    </label>
+                </td>
+                <td>
+                    <span onclick="isshan('{$item[\'id\']}');return false;" title="删除"><i class="layui-icon layui-icon-delete"></i></span>
+                </td>
+            </tr>
+            {/volist}
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="LAY-user-front-submit" id="LAY-user-front-submit" value="确认">
+    </div>
+</div>
+<script src="/admin/js/jquery.js"></script>
+<script src="/admin/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/admin/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'upload','element','laydate'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,upload = layui.upload
+            ,laydate = layui.laydate;
+
+        var opid=0;
+        window.addlist = function() {
+            opid++;
+            var htmlcent='<tr><input type="hidden" name="fid[]" value="0" />';
+            htmlcent+='<td><input type="text" name="name[]" class="layui-input" placeholder="请输入字段名称"/></td>';
+            htmlcent+='<td ><select class="form-control input-medium" id="va'+opid+'" name="type[]"><option value="1">varChar</option><option value="2">Int</option><option value="3">Text</option><option value="4">Decimal</option><option value="5">Date</option><option value="6">DateTime</option></select></td>';
+            htmlcent+='<td style="text-align:center;"><input type="text" name="length[]" class="layui-input" placeholder="长度"/></td>' +
+                '<td  style="text-align:center;"><input type="text" class="layui-input" placeholder="默认值" name="default[]" /></td>';
+
+            htmlcent+='<td ><select class="form-control input-medium" id="va'+opid+'" name="style[]"><option value="1">文本框</option><option value="2">单选框</option><option value="3">上传图片</option><option value="4">富文本</option></select></td>';
+            htmlcent+='<td style="text-align:center;"><input type="text" name="val[]" class="layui-input" placeholder="表单值，多个用,隔开"/></td>' +
+                '<td style="text-align:center;"><input type="text" name="beizhu[]" class="layui-input" placeholder="备注" style="width:70px;text-align:center;text-indent:0px;"/></td>' +
+                '<td style="text-align:center;"><label class="checkbox"><input type="checkbox" lay-ignore name="search[]"></label></td>'+
+                '<td><a href="javascript:void(0);" onclick="delform(this)" title="删除" class="btn btn-default btn-sm"><i class="layui-icon layui-icon-delete"></i></a></td></tr>';
+            $("#centxx").append(htmlcent);
+            form.render();
+        }
+
+        window.delform = function(th) {
+            $(th).parent().parent().remove();
+        }
+
+    })
+
+    // var opid=0;
+    // function addlist(){
+    //     opid++;
+    //     var htmlcent='<tr><input type="hidden" name="fid[]" value="0" />';
+    //     htmlcent+='<td><input type="text" name="name[]" class="layui-input" placeholder="请输入字段名称"/></td>';
+    //     htmlcent+='<td ><select class="xuanval" id="va'+opid+'" name="type[]"><option value="1">varChar</option><option value="2">Int</option><option value="3">Text</option><option value="4">Decimal</option><option value="5">Date</option><option value="6">DateTime</option></select></td>';
+    //     htmlcent+='<td style="text-align:center;"><input type="text" name="length[]" class="layui-input" placeholder="长度"/></td>' +
+    //         '<td  style="text-align:center;"><input type="text" class="layui-input" placeholder="默认值" name="default[]" /></td>';
+    //
+    //     htmlcent+='<td ><select class="xuanval" id="va'+opid+'" name="style[]"><option value="1">文本框</option><option value="2">单选框</option></select></td>';
+    //     htmlcent+='<td style="text-align:center;"><input type="text" name="val[]" class="layui-input" placeholder="表单值，多个用,隔开" style="width:70px;text-align:center;text-indent:0px;"/></td>' +
+    //         '<td style="text-align:center;"><input type="text" name="beizhu[]" class="layui-input" placeholder="备注" style="width:70px;text-align:center;text-indent:0px;"/></td>' +
+    //         '<td><a href="javascript:void(0);" onclick="delform(this)" title="删除" class="btn btn-default btn-sm"><i class="layui-icon layui-icon-delete"></i></a></td></tr>';
+    //     $("#centxx").append(htmlcent);
+    // }
+    // function delform(th){
+    //     $(th).parent().parent().remove();
+    // }
+</script>
+</body>
+</html>

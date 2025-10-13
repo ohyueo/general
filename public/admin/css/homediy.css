@@ -1,0 +1,31 @@
+.left_cent{
+    width:400px;
+    height:820px;
+    background:#F0F0F0;
+    display: flex;justify-content: center;align-items: center;
+    background:url(../img/iphone.png) no-repeat 0px 0px;
+    float: left;
+}
+.left_cent iframe{
+    overflow-x:hidden;overflow-y:auto;
+}
+/* 设置滚动条的样式 */
+.left_cent iframe::-webkit-scrollbar{
+    width: 3px;
+}
+/*滚动槽*/
+.left_cent iframe::-webkit-scrollbar-track{
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+/* 滚动条滑块 */
+.left_cent iframe::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.15);
+}
+
+.right_cent{
+    margin-left: 20px;
+    float: left;
+}

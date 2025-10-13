@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>主页</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/admin/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+  <div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+          <div class="layui-card-header">
+            今日注册用户
+            <span class="layui-badge layui-bg-blue layuiadmin-badge">日</span>
+          </div>
+          <div class="layui-card-body layuiadmin-card-list">
+            <p class="layuiadmin-big-font">{$dayuno}</p>
+            <p>
+              总计用户
+              <span class="layuiadmin-span-color">{$zuno} <i class="layui-inline layui-icon layui-icon-flag"></i></span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+          <div class="layui-card-header">
+            今日活跃用户
+            <span class="layui-badge layui-bg-blue layuiadmin-badge">日</span>
+          </div>
+          <div class="layui-card-body layuiadmin-card-list">
+            <p class="layuiadmin-big-font">{$dayhuo}</p>
+            <p>
+              昨日活跃用户
+              <span class="layuiadmin-span-color">{$oldhuo} <i class="layui-inline layui-icon layui-icon-flag"></i></span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+          <div class="layui-card-header">
+            预约数量
+            <span class="layui-badge layui-bg-blue layuiadmin-badge">日</span>
+          </div>
+          <div class="layui-card-body layuiadmin-card-list">
+            <p class="layuiadmin-big-font">{$dayyu}</p>
+            <p>
+              总预约
+              <span class="layuiadmin-span-color">{$zyu} <i class="layui-inline layui-icon layui-icon-flag"></i></span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+          <div class="layui-card-header">
+            今日核销
+            <span class="layui-badge layui-bg-blue layuiadmin-badge">日</span>
+          </div>
+          <div class="layui-card-body layuiadmin-card-list">
+            <p class="layuiadmin-big-font">{$dayhe}</p>
+            <p>
+              总核销
+              <span class="layuiadmin-span-color">{$zhe} <i class="layui-inline layui-icon layui-icon-flag"></i></span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+        </div>
+
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-md12">
+        <div class="layui-card">
+          <div class="layui-card-header">累计注册用户地区分布</div>
+          <div class="layui-card-body">
+            <div class="layui-row layui-col-space15">
+              <div class="layui-col-sm4">
+                <table class="layui-table layuiadmin-page-table" lay-skin="line">
+                  <thead>
+                  <tr>
+                    <th>排名</th>
+                    <th>注册地区</th>
+                    <th>注册人数</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {volist name="province" id="vo" key='k'}
+                  <tr>
+                    <td>{$k}</td>
+                    <td>{$vo.province}</td>
+                    <td>{$vo.value}</td>
+                  </tr>
+                  {/volist}
+                  </tbody>
+                </table>
+              </div>
+              <div class="layui-col-sm8">
+                <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-pagethree">
+                  <div carousel-item id="LAY-index-pagethree">
+                    <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div></div>
+    </div>
+
+
+    <div class="layui-row layui-col-space15">
+      <div class="layui-col-sm8">
+        <div class="layui-card">
+          <div class="layui-card-header">流量统计</div>
+          <div class="layui-card-body">
+
+            <div class="layui-carousel layadmin-carousel layadmin-dataview" data-anim="fade" lay-filter="LAY-index-heaparea">
+              <div carousel-item id="LAY-index-heaparea">
+                <div><i class="layui-icon layui-icon-loading1 layadmin-loading"></i></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-sm4">
+        <div class="layui-card">
+          <div class="layui-card-header">
+            作者心语
+            <i class="layui-icon layui-icon-tips" lay-tips="要支持的噢" lay-offset="5"></i>
+          </div>
+          <div class="layui-card-body layui-text layadmin-text">
+            <p>一直以来，海之心秉承为用户提供高性价比系统的初心，虔诚服务各层次各行业的用户，在商业横飞的当今时代，这一信念从未动摇。</p>
+            <p>子曰：君子不用防，小人防不住。请务必通过正规渠道，获得系统！尊重开发者的劳动成果，安心放心的使用！</p>
+            <p>—— ohyueo</p>
+          </div>
+        </div>
+      </div>
+      <div class="layui-col-md4">
+        <div class="layui-card">
+          <div class="layui-card-header">版本信息</div>
+          <div class="layui-card-body layui-text layadmin-version">
+            <table class="layui-table">
+              <colgroup>
+                <col width="100">
+                <col>
+              </colgroup>
+              <tbody>
+              <tr>
+                <td>系统名称</td>
+                <td>{:config('webcloud.title')}</td>
+              </tr>
+              <tr>
+                <td>当前版本</td>
+                <td>
+                  <span>v 1.0.8</span>
+                </td>
+              </tr>
+              <tr>
+                <td>系统协议</td>
+                <td class="layui-btnxx" data-method="notice">
+                  <span style="cursor:pointer;font-size: 13px;color:#01AAED;">《软件使用协议》</span>
+                  <?php if($time!=0){ ?>
+                  <span style="font-size: 12px;color:#666666;margin-left: 10px;">于 {$time} 同意</span>
+                  <?php } ?>
+                </td>
+              </tr>
+
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+      </div>
+
+  <style> .layui-carousel>[carousel-item]>* { display: block; } </style>
+  <script src="/admin/layuiadmin/layui/layui.js"></script>
+  <script>
+      var ty="{$ty}";
+      layui.config({
+          base: '/admin/layuiadmin/' //静态资源所在路径
+      }).extend({
+          index: 'lib/index' //主入口模块
+      }).use(['index','carousel', 'echarts'], function(){
+          var $ = layui.$
+              ,admin = layui.admin, layer = layui.layer;
+          var tit='系统受国家计算机软件著作权保护,请从正规渠道获得系统。<br>本系统遵循《产品使用协议》使用本系统则认为同意该协议以及以下附加协议：<br>系统不得用于违反国家法律法规的用途<br>请合理合法使用本系统，使用过程中产生的任何民事刑事责任均由使用者承担，与开发者无关<br> 任何经由本系统而发布、上传的文字、资讯、资料、音乐、照片、图形、视讯、信息或其它资料（以下简称“内容”）请上传者自行审核其资质和合法性，由此产生的任何后果均由内容上传者承担责任。';
+          if(ty==0){
+              layer.open({
+                  type: 1,
+                  title: false, //不显示标题栏
+                  closeBtn: false,
+                  area: '800px;',
+                  shade: 0.8,
+                  id: 'LAY_layuipro', //设定一个id，防止重复弹出
+                  btn: ['同意该协议', '我再想想'],
+                  btnAlign: 'c',
+                  moveType: 1 ,//拖拽模式，0或者1
+                  content: '<div style="padding: 20px; line-height: 22px;color: #333; font-weight: 500;">'+tit+'</div>',
+                  yes: function (index,layero) {
+                      layer.close(index);
+                      //同意后修改内容和 同意时间
+                      $.ajax({
+                          type: 'POST',
+                          url: '/admin/Home/updatexieyi',
+                          success: function (data) {
+                          }
+                      })
+                  }
+              });
+          }
+          //触发事件
+          var active = {
+              notice: function () {
+                  //示范一个公告层
+                  layer.open({
+                      type: 1,
+                      title: false, //不显示标题栏
+                      closeBtn: false,
+                      area: '800px;',
+                      shade: 0.8,
+                      id: 'LAY_layuipro', //设定一个id，防止重复弹出
+                      btn: ['同意该协议', '我再想想'],
+                      btnAlign: 'c',
+                      moveType: 1 ,//拖拽模式，0或者1
+                      content: '<div style="padding: 20px; line-height: 22px;color: #333; font-weight: 500;">'+tit+'</div>',
+                      yes: function(index, layero){
+                          layer.close(index);
+                          //同意后修改内容和 同意时间
+                          $.ajax({
+                              type: 'POST',
+                              url: '/admin/Home/updatexieyi',
+                              success: function (data) {
+                              }
+                          })
+                      }
+                  });
+              }
+          }
+          $('.layui-btnxx').on('click', function(){
+              var othis = $(this), method = othis.data('method');
+              active[method] ? active[method].call(this, othis) : '';
+          });
+          $.ajax({
+              type: 'POST',
+              url: '/admin/Home/getprovince',
+              success: function (data) {
+                  //console.log(data);
+                  //---地图代码---
+                  //var data=[];
+                  var e = layui.$, a = (layui.carousel, layui.echarts), l = [],
+                      t = [{
+                          title: {text: "", subtext: ""},
+                          tooltip: {trigger: "item"},
+                          dataRange: {orient: "horizontal", min: 0, max: 6e4, text: ["高", "低"], splitNumber: 0},
+                          series: [{
+                              name: "全国分布",
+                              type: "map",
+                              mapType: "china",
+                              selectedMode: "multiple",
+                              itemStyle: {normal: {label: {show: !0}}, emphasis: {label: {show: !0}}},
+                              data:   data//通过ajax请求的数据 后台要按照格式要求返回才可以直接用
+                              // 完整格式
+                              //         [{name: "西藏", value: 60}, {name: "青海", value: 167}, {name: "宁夏", value: 210}, {
+                              //     name: "海南",
+                              //     value: 252
+                              // }, {name: "甘肃", value: 502}, {name: "贵州", value: 570}, {name: "新疆", value: 661}, {
+                              //     name: "云南",
+                              //     value: 8890
+                              // }, {name: "重庆", value: 10010}, {name: "吉林", value: 5056}, {name: "山西", value: 2123}, {
+                              //     name: "天津",
+                              //     value: 9130
+                              // }, {name: "江西", value: 10170}, {name: "广西", value: 99999}, {name: "陕西", value: 9251}, {
+                              //     name: "黑龙江",
+                              //     value: 5125
+                              // }, {name: "内蒙古", value: 1435}, {name: "安徽", value: 9530}, {name: "北京", value: 51919}, {
+                              //     name: "福建",
+                              //     value: 3756
+                              // }, {name: "上海", value: 59190}, {name: "湖北", value: 37109}, {name: "湖南", value: 8966}, {
+                              //     name: "四川",
+                              //     value: 31020
+                              // }, {name: "辽宁", value: 7222}, {name: "河北", value: 3451}, {name: "河南", value: 9693}, {
+                              //     name: "浙江",
+                              //     value: 62310
+                              // }, {name: "山东", value: 39231}, {name: "江苏", value: 35911}, {name: "广东", value: 999999}]
+                          }]
+                      }], i = e("#LAY-index-pagethree").children("div"), n = function (e) {
+                          l[e] = a.init(i[e], layui.echartsTheme), l[e].setOption(t[e]), window.onresize = l[e].resize
+                      };
+                  i[0] && n(0);
+                  //---/地图代码---
+              },
+              dataType: "json",
+          });
+          $.ajax({
+              type: 'POST',
+              url: '/admin/Home/getpvtime',
+              success: function (data) {
+                  //console.log(data);
+                  //---地图代码---
+                  //var data=[];
+                  var datex=data.time;
+                  var zhuce=data.zhuce;
+                  var qingqiu=data.qingqiu;
+                  var user=data.user;
+                  var e = layui.$, a = (layui.carousel, layui.echarts), l = [],
+                      t = [{
+                          title: {text: "", subtext: ""},
+                          tooltip: {},
+                          legend: { //顶部显示 与series中的数据类型的name一致
+                              data: ['注册数量',
+                                  '请求IP',
+                                  '活跃用户']
+                          },
+                          xAxis: {
+                              // type: 'category',
+                              // boundaryGap: false, //从起点开始
+                              data: datex
+                          },
+                          yAxis: {
+                              type: 'value'
+                          },
+                          series: [
+                              {
+                                  name: '注册数量',
+                                  type: 'line', //线性
+                                  data: zhuce,
+                              },
+                              {
+                                  name: '请求IP',
+                                  type: 'line', //线性
+                                  data: qingqiu,
+                              },
+                              {
+                                  smooth: true, //曲线 默认折线
+                                  name: '活跃用户',
+                                  type: 'line', //线性
+                                  data: user,
+                              }
+                          ]
+                      }], i = e("#LAY-index-heaparea").children("div"), n = function (e) {
+                          l[e] = a.init(i[e], layui.echartsTheme), l[e].setOption(t[e]), window.onresize = l[e].resize
+                      };
+                  i[0] && n(0);
+                  //---/地图代码---
+              },
+              dataType: "json",
+          });
+      })
+  </script>
+</body>
+</html>

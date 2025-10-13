@@ -1,0 +1,17 @@
+.v-left{
+    width: 212px;
+}
+.v-right{
+    width: 970px;
+}
+.v-lefttit{
+    height: 38px;
+    background: #F5F5F5;
+}
+.v-leftli{
+    height: 32px;
+    border-bottom: 1px solid #f8f8f8;
+}
+.v-center{
+    width: 90%;
+}

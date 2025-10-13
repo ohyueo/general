@@ -1,0 +1,84 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layuiAdmin 商品列表 iframe 框</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+</head>
+<body>
+	
+  <div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+		<input type="hidden" name="id" id="id" value="" />
+	  <div class="layui-form-item">
+		  <label class="layui-form-label">分类名称</label>
+		  <div class="layui-input-inline">
+			  <input type="text" name="title" id="title"  placeholder="分类名称" autocomplete="off" class="layui-input">
+		  </div>
+	  </div>
+      <div class="layui-form-item">
+          <label class="layui-form-label">分类图片</label>
+          <div class="layui-input-inline">
+              <input type="text" name="img" id="img" placeholder="请上传图片" autocomplete="off" class="layui-input" >
+              <img  id="imgx1" style="width:100px;">
+          </div>
+          <button style="float: left;" type="button" class="layui-btn" id="layuiadmin-upload-useradmin">上传图片</button>
+      </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">排序id</label>
+          <div class="layui-input-inline">
+              <input type="text" name="paiid" id="paiid"  placeholder="排序id" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+
+
+
+
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-front-submit" id="LAY-user-front-submit" value="确认">
+    </div>
+  </div>
+
+  <script src="/admin/layuiadmin/layui/layui.js"></script>
+  <script>
+
+  layui.config({
+    base: '/admin/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form', 'upload', 'util','layer'], function(){
+    var $ = layui.$
+        , layer = layui.layer
+    ,form = layui.form
+    ,upload = layui.upload;
+
+	upload.render({
+    elem: '#layuiadmin-upload-useradmin' //绑定元素
+    ,url: "{:url('admin/Index/upload')}" //上传接口
+	,ext: 'jpg|png|gif'//限制文件
+    ,done: function(res){
+      //上传完毕回调
+	  $(this.item).prev("div").children("input").val(res.filename)
+	 // document.getElementById('img').value = res.filename;
+	  layer.msg("上传成功");
+    }
+    ,error: function(){
+      //请求异常回调
+    }
+  });
+
+
+
+
+  })
+
+ 
+  </script>
+</body>
+</html>

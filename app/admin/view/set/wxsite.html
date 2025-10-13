@@ -1,0 +1,141 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>网站设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/admin/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+<form class="layui-form" action="/admin/set/wxsite" method="post">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">微信设置
+                        <!--<span style="font-size: 12px;color:red;margin-left: 10px;">(目前公众号和小程序未打通数据，只可单独使用公众号或小程序)</span>-->
+                    </div>
+                    <div class="layui-card-body">
+                        <blockquote class="layui-elem-quote">小程序设置
+                            <a href="/admin/set/dowwxapp" style="font-size: 12px;color:#3B91FF;margin-left: 10px;"><span>*小程序前端下载</span></a>
+                        </blockquote>
+                        <div class="layui-form-item" id="sms_appid">
+                            <label class="layui-form-label">AppID</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="wx_xcx_appid"  value="{:config('-wxsite.wx_xcx_appid')}" placeholder="AppID（必填项）" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">appid</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">密钥</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="wx_xcx_key"  value="{:config('-wxsite.wx_xcx_key')}" placeholder="密钥（必填项）" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">小程序密钥</div>
+                        </div>
+                        <blockquote class="layui-elem-quote">公众号设置
+                            <a href="https://www.ohyu.cn/index/help/detail/id/49" target="_blank" style="font-size: 12px;color:#3B91FF;margin-left: 10px;"><span>*公众号域名配置教程</span></a>
+                        </blockquote>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">AppID</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="wx_gzh_appid"  value="{:config('-wxsite.wx_gzh_appid')}" placeholder="AppID（必填项）" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">appid</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">密钥</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="wx_gzh_key"  value="{:config('-wxsite.wx_gzh_key')}" placeholder="密钥（必填项）" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">公众号密钥</div>
+                        </div>
+                        <blockquote class="layui-elem-quote">微信支付设置<span style="color: #3B91FF;font-size: 12px;">（设置支付之前一定要先设置 系统设置&ndash;&gt;前端设置-->系统域名 不然回调可能不成功）</span>
+                            <a href="https://www.ohyu.cn/index/help/detail/id/61" target="_blank" style="font-size: 12px;color:#3B91FF;margin-left: 10px;"><span>*微信支付配置教程</span></a>
+                        </blockquote>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">商户ID</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="wx_xcx_mchid"  value="{:config('-wxsite.wx_xcx_mchid')}" placeholder="商户ID（必填项）" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">微信支付商户ID</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">商户密钥</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="wx_xcx_mchkey"  value="{:config('-wxsite.wx_xcx_mchkey')}" placeholder="商户密钥（必填项）" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">微信支付商户密钥key</div>
+                        </div>
+                        <blockquote class="layui-elem-quote">如果涉及到退款，请更新根目录下面的public/cert/目录下的支付证书文件</blockquote>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="submit" class="layui-btn" value="确认保存">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+<script src="/admin/layuiadmin/layui/layui.js"></script>
+<script src="/admin/layuiadmin/jq/jquery.js"></script>
+<script>
+    layui.config({
+        base: '/admin/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'upload','layedit'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,upload = layui.upload,layedit = layui.layedit;
+
+
+        form.on('radio', function(data) {
+            var va = data.elem.value;
+            if(va==1){
+                $("#sms_sign").hide();//签名
+                $("#sms_appid").show();//appid
+            }else if(va==2){
+                $("#sms_sign").show();//签名
+                $("#sms_appid").show();//appid
+            }else if(va==3){
+                $("#sms_sign").show();//签名
+                $("#sms_appid").show();//appid
+            }else if(va==4){
+                $("#sms_sign").hide();//签名
+                $("#sms_appid").hide();//appid
+            }
+            console.log(va);
+        });
+
+
+        upload.render({
+            elem: '#layuiadmin-upload-useradmin' //绑定元素
+            ,url: "{:url('/admin/Index/upload')}" //上传接口
+            ,ext: 'jpg|png|gif'//限制文件
+            ,done: function(res){
+                //上传完毕回调
+                $(this.item).prev("div").children("input").val(res.filename);
+                document.getElementById('img1').src = res.filename;
+                layer.msg("上传成功");
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+
+        });
+
+
+    })
+</script>
+</body>
+</html>

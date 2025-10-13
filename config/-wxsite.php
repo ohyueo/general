@@ -1,0 +1,1 @@
+<?php return ['wx_xcx_appid'=>'wx71e5a453cd04f43d','wx_xcx_key'=>'f5648a56e43bf279cfbcee706e72484f','wx_gzh_appid'=>'','wx_gzh_key'=>'','wx_xcx_mchid'=>'1493704602','wx_xcx_mchkey'=>'d0z14eudzymjpbwn00ahjsostftjs2ke',]; 

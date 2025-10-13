@@ -1,0 +1,91 @@
+@font-face {
+  font-family: 'iconfont';  /* Project id 2621851 */
+  src: url('@/static/font/icon.ttf') format('woff2'),
+       url('@/static/font/icon.woff') format('woff'),
+       url('@/static/font/icon.woff2') format('truetype');
+}
+.icon{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.jianju-5{
+	width: 750rpx;
+	height: 10rpx;
+	background-color: #f6f6f6;
+}
+.jianju-10{
+	width: 750rpx;
+	height: 20rpx;
+	background-color: #f6f6f6;
+}
+.zhuti_color_huang{
+	color:#ff9900;
+}
+.zhuti_color_lv{
+	color:#19be6b;
+}
+.zhuti_color_hong{
+	color:#fa3534;
+}
+.zhuti_color_hui{
+	color:#909399;
+}
+.zhuti_color_lan{
+	color:#2979ff;
+}
+.zhuti_color{
+	color:#5FB878;
+}
+.zhuti_bg{
+	background-color: #5FB878;
+}
+.zhuti_bg2{
+	background-color: #97BCFF;
+}
+.zhuti_bg3{
+	background-color: #5290F7;
+}
+.zhuti_border_bottom-1{
+	border-bottom: 2rpx solid #2979ff!important;
+}
+.zhuti_border{
+	border: 2rpx solid #5FB878;
+}
+.zhuti_border2{
+	border: 1rpx solid #5FB878;
+}
+
+.li1{
+	background-image: linear-gradient(180deg, #9A8FF7, #7D73F0);
+	-webkit-box-shadow: 0px 5px 4px rgba(127, 117, 241, 0.2)!important;
+	box-shadow: 0px 5px 4px rgba(127, 117, 241, 0.2)!important;
+}
+.li2{
+	background-image: linear-gradient(180deg, #FD932D, #FE4C30);
+	-webkit-box-shadow: 0px 5px 4px rgba(254, 79, 46, 0.2)!important;
+	box-shadow: 0px 5px 4px rgba(254, 79, 46, 0.2)!important;
+}
+.li3{
+	background-image: linear-gradient(180deg, #00B7ED, #069DCA);
+	-webkit-box-shadow: 0px 5px 4px rgba(5, 157, 203, 0.2)!important;
+	box-shadow: 0px 5px 4px rgba(5, 157, 203, 0.2)!important;
+}
+.li4{
+	background-image: linear-gradient(180deg, #FED231, #FFA907);
+	-webkit-box-shadow: 0px 5px 4px rgba(254, 176, 11, 0.2)!important;
+	box-shadow: 0px 5px 4px rgba(254, 176, 11, 0.2)!important;
+}
+.li5{
+	background-image: linear-gradient(180deg, #77FAB8, #23D0A2);
+	-webkit-box-shadow: 0px 5px 4px rgba(45, 213, 163, 0.2)!important;
+	box-shadow: 0px 5px 4px rgba(45, 213, 163, 0.2)!important;
+}
+.li6{
+	background-image: linear-gradient(180deg, #FE6E65, #FF9466);
+	-webkit-box-shadow: 0px 5px 4px rgba(254, 149, 102, 0.2)!important;
+	box-shadow: 0px 5px 4px rgba(254, 149, 102, 0.2)!important;
+}

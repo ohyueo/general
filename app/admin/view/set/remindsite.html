@@ -1,0 +1,132 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>提醒设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/admin/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+<form class="layui-form" action="/admin/set/remindsite" method="post">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">提醒设置</div>
+                    <div class="layui-card-body">
+
+                        <blockquote class="layui-elem-quote">公众号提醒模板
+                            <a href="https://www.ohyu.cn/index/help/detail/id/50" target="_blank" style="font-size: 12px;color:#3B91FF;margin-left: 10px;"><span>*公众号提醒模板配置教程</span></a>
+                        </blockquote>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">预约成功</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="remind_gzh_paysuccess"  value="{:config('-remindsite.remind_gzh_paysuccess')}" placeholder="模板ID" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">订单预约成功后的提醒模板-IT科技/IT软件与服务-预约成功通知-OPENTM416748201</div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">取消预定</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="remind_gzh_tmpquxiao"  value="{:config('-remindsite.remind_gzh_tmpquxiao')}" placeholder="模板ID" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">取消预定订单提醒-IT科技/IT软件与服务-预约取消通知-OPENTM401761240</div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">预约退款</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="remind_gzh_tmptuikuan"  value="{:config('-remindsite.remind_gzh_tmptuikuan')}" placeholder="模板ID" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">退款的提醒模板-IT科技/IT软件与服务-退款成功通知-OPENTM414889350</div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">到期提醒</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="remind_gzh_starttimeid"  value="{:config('-remindsite.remind_gzh_starttimeid')}" placeholder="模板ID" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">订单即将开始的提醒模板-IT科技/IT软件与服务-预约到期提醒-OPENTM407138405</div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">新订单提醒</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="remind_gzh_neworder"  value="{:config('-remindsite.remind_gzh_neworder')}" placeholder="模板ID" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">新订单提醒（有人预约提醒）-IT科技/IT软件与服务-新订单提醒-OPENTM207350009</div>
+                        </div>
+
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="submit" class="layui-btn" value="确认保存">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+<script src="/admin/layuiadmin/layui/layui.js"></script>
+<script src="/admin/layuiadmin/jq/jquery.js"></script>
+<script>
+    layui.config({
+        base: '/admin/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'upload','layedit'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,upload = layui.upload,layedit = layui.layedit;
+
+
+        form.on('radio', function(data) {
+            var va = data.elem.value;
+            if(va==1){
+                $("#sms_sign").hide();//签名
+                $("#sms_appid").show();//appid
+            }else if(va==2){
+                $("#sms_sign").show();//签名
+                $("#sms_appid").show();//appid
+            }else if(va==3){
+                $("#sms_sign").show();//签名
+                $("#sms_appid").show();//appid
+            }else if(va==4){
+                $("#sms_sign").hide();//签名
+                $("#sms_appid").hide();//appid
+            }
+            console.log(va);
+        });
+
+
+        upload.render({
+            elem: '#layuiadmin-upload-useradmin' //绑定元素
+            ,url: "{:url('/admin/Index/upload')}" //上传接口
+            ,ext: 'jpg|png|gif'//限制文件
+            ,done: function(res){
+                //上传完毕回调
+                $(this.item).prev("div").children("input").val(res.filename);
+                document.getElementById('img1').src = res.filename;
+                layer.msg("上传成功");
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+
+        });
+
+
+    })
+</script>
+</body>
+</html>

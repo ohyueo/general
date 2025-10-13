@@ -1,0 +1,43 @@
+.divleft{
+    width: 340px;
+    height: 440px;
+}
+.divright{
+    width: 840px;
+    height: 440px;
+    margin-left: 20px;
+}
+.leftvieimg{
+    width: 340px;
+    height: 340px;
+}
+.pricevie{
+    height: 100px;
+    background: #eeeeee;
+}
+.ricli{
+    height: 50px;
+}
+.number_no{
+    width: 70px;
+    height: 32px;
+    border-radius: 10px;
+    border:1px solid #dcdfe6;
+}
+.infobtn{
+    width: 160px;
+    height: 40px;
+    border-radius: 10px;
+}
+.numput{
+    width: 46px;
+    height: 24px;
+    border: none;
+    outline: none;
+    margin-left: 2px;
+    text-indent: 4px;
+    text-align: center;
+}
+.x_hr{
+    height:1px;border:none;border-top:1px dashed #cccccc;
+}

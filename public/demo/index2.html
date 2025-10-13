@@ -1,0 +1,71 @@
+<!DOCTYPE html><html lang=zh-CN><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><title>{:config('-appsite.app_name')}</title>
+<script>var coverSupport = 'CSS' in window && typeof CSS.supports === 'function' && (CSS.supports('top: env(a)') || CSS.supports('top: constant(a)'))
+            document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0' + (coverSupport ? ', viewport-fit=cover' : '') + '" />')</script>
+			<link rel=stylesheet href=/static/index.2da1efab.css></head><body><noscript><strong>Please enable JavaScript to continue.</strong></noscript><div id=app></div>
+			<script src=/static/js/chunk-vendors.7c08eefd.js></script>
+			<script>
+				var ohyueo_weburl="{:config('-appsite.app_domainname')}";
+				var ohyueo_appid="{:config('-wxsite.wx_gzh_appid')}";
+				var ohyueo_qqkey="{:config('-mapsite.map_appkey')}";
+				var puarr=[];
+				//首页
+				var home={
+                    pagePath: "pages/index/index",
+                    iconPath: "static/img/footer/a2.png",
+                    selectedIconPath: "static/img/footer/a1.png",
+                    text: "首页",
+                    redDot: !1,
+                    badge: ""
+                };
+				puarr.push(home);
+				//挂号
+			    var yuyue="{$yuyue}";
+			    if(yuyue==1){
+			        var actli={
+                        pagePath: "pages/yuyue/index",
+                        iconPath: "static/img/footer/b2.png",
+                        selectedIconPath: "static/img/footer/b1.png",
+                        text: "预约",
+                        redDot: !1,
+                        badge: ""
+                    };
+			        puarr.push(actli);
+				}
+				//商城
+				var isshop="{$shop}";
+			    if(isshop==1){
+			        var shoplist={
+                        pagePath: "pages/shop/index",
+                        iconPath: "static/img/footer/c2.png",
+                        selectedIconPath: "static/img/footer/c1.png",
+                        text: "商城",
+                        redDot: !1,
+                        badge: ""
+                    };
+			        puarr.push(shoplist);
+			    }
+			    //新闻
+				var news="{$news}";
+			    if(news==1){
+			        var coulist={
+                        pagePath: "pages/texter/index",
+                        iconPath: "static/img/footer/d2.png",
+                        selectedIconPath: "static/img/footer/d1.png",
+                        text: "发现",
+                        redDot: !1,
+                        badge: ""
+                    };
+			        puarr.push(coulist);
+				}
+				var userlist={
+                    pagePath: "pages/user/index",
+                    iconPath: "static/img/footer/e2.png",
+                    selectedIconPath: "static/img/footer/e1.png",
+                    text: "我的",
+                    redDot: !1,
+                    badge: ""
+                };
+			    puarr.push(userlist);
+				var ohyueo_barlist=puarr;
+			</script>
+			<script src=/static/js/index.09dfcb81.js></script></body></html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>主页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/admin/layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="/admin/css/homediy.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-sm4">
+                <div class="layui-card">
+                    <div class="left_cent u-margin-top-10">
+                    <iframe id="some_frame_id"  style="background: #FFFFFF;" marginwidth="0" marginheight="0" frameborder="0" scrolling="none"  width="346px" height="640px" src="/"></iframe>
+                    </div>
+                </div>
+            </div>
+
+            
+
+
+            <div class="layui-col-sm4">
+                
+                <div class="layui-card layui-form" >
+                    <div class="layui-card-header">公共配置</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">前端模板</label>
+                            <div class="layui-input-block">
+                                <input style="margin-right: 0px;" type="radio" name="template" value="1" lay-filter="switch11" title="默认模板" {if condition="$template==1"} checked {/if}>
+                                <img src="/demo/web01.png" style="width: 20px;margin-right: 10px;" onclick="openimg('/demo/web01.png')" />
+                                <input type="radio" name="template" value="2" lay-filter="switch11"  title="景区模板" {if condition="$template==2"} checked {/if}>
+                                <img src="/demo/web02.png" style="width: 20px;margin-right: 10px;" onclick="openimg('/demo/web02.png')" />
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">开启则首页显示列表块</div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">主题颜色</label>
+                            <div class="layui-input-block">
+                                <div id="zhuticolor"></div>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">页面的主题文字和背景颜色</div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <!--<div class="layui-card layui-form" >-->
+                    <!--<div class="layui-card-header">首页样式</div>-->
+                    <!--<div class="layui-card-body">-->
+                        <!--<div class="layui-form-item layui-form-text">-->
+                            <!--<label class="layui-form-label">启用轮播图</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="checkbox" lay-filter="switch1" lay-verify="required" value="{$lunbo}"  name="lunbo"-->
+                                       <!--{if condition="$lunbo==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">-->
+                            <!--</div>-->
+                            <!--<div class="layui-form-mid layui-word-aux">开启则显示首页轮播图<span lay-href="/admin/Zong/zhimg" lay-text="设置轮播图" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*设置轮播图</span></div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-form-item layui-form-text">-->
+                            <!--<label class="layui-form-label">启用公告</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="checkbox" lay-filter="switch2" lay-verify="required" value="{$gonggao}"  name="gonggao"-->
+                                       <!--{if condition="$gonggao==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">-->
+                            <!--</div>-->
+                            <!--<div class="layui-form-mid layui-word-aux">开启则显示首页公告<span lay-href="/admin/Zong/announce" lay-text="公告" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*设置公告</span></div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-form-item layui-form-text">-->
+                            <!--<label class="layui-form-label">启用小方块</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="checkbox" lay-filter="switch3" lay-verify="required" value="{$fangkuai}"  name="fangkuai"-->
+                                       <!--{if condition="$fangkuai==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">-->
+                            <!--</div>-->
+                            <!--<div class="layui-form-mid layui-word-aux">开启则显示首页小方块<span lay-href="/admin/Zong/zhimg" lay-text="设置小方块" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*设置小方块</span></div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-form-item layui-form-text">-->
+                            <!--<label class="layui-form-label">启用新闻</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="checkbox" lay-filter="switch7" lay-verify="required" value="{$news}"  name="news"-->
+                                       <!--{if condition="$news==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">-->
+                            <!--</div>-->
+                            <!--<div class="layui-form-mid layui-word-aux">开启则显示首页新闻<span lay-href="/admin/Wen/index" lay-text="设置新闻" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*设置新闻</span></div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+
+                <div class="layui-card layui-form" >
+                    <div class="layui-card-header">底部导航栏<span style="font-size: 12px;color: red;"> (改了底部导航栏小程序端需要重新上传)</span></div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">预约</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" lay-filter="switch4" lay-verify="required" value="{$yuyue}"  name="yuyue"
+                                       {if condition="$yuyue==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">开启则底部显示预约<span lay-href="/admin/Yuyue/yuyuelist" lay-text="预约列表" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*预约管理</span></div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">商城</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" lay-filter="switch5" lay-verify="required" value="{$shop}"  name="shop"
+                                       {if condition="$shop==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">开启则底部显示商城<span lay-href="/admin/Shop/shoplist" lay-text="商品列表" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*管理商城</span></div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">发现</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" lay-filter="switch6" lay-verify="required" value="{$news}"  name="news"
+                                       {if condition="$news==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">开启则底部显示发现<span lay-href="/admin/Wen/index" lay-text="新闻动态" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*管理新闻</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-col-sm4">
+                <div class="layui-card layui-form" >
+                    <div class="layui-card-header">个人中心</div>
+                    <div class="layui-card-body">
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">支付记录</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" lay-filter="switch8" lay-verify="required" value="{$paymsg}"  name="paymsg"
+                                       {if condition="$paymsg==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">开启则个人中心显示支付记录<span lay-href="/admin/Pay/payorder" lay-text="支付记录" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*支付记录</span></div>
+                        </div>
+                        <!--<div class="layui-form-item layui-form-text">-->
+                            <!--<label class="layui-form-label">门票管理</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="checkbox" lay-filter="switch9" lay-verify="required" value="{$opentickets}"  name="opentickets"-->
+                                       <!--{if condition="$opentickets==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">-->
+                            <!--</div>-->
+                            <!--<div class="layui-form-mid layui-word-aux">开启则个人中心显示门票管理<span lay-href="/admin/Tickets/ticketslist" lay-text="门票管理" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*门票管理</span></div>-->
+                        <!--</div>-->
+                        <!--<div class="layui-form-item layui-form-text">-->
+                            <!--<label class="layui-form-label">会员卡管理</label>-->
+                            <!--<div class="layui-input-block">-->
+                                <!--<input type="checkbox" lay-filter="switch10" lay-verify="required" value="{$vip}"  name="vip"-->
+                                       <!--{if condition="$vip==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">-->
+                            <!--</div>-->
+                            <!--<div class="layui-form-mid layui-word-aux">开启则个人中心显示会员卡管理<span lay-href="/admin/Vip/vip" lay-text="会员卡管理" style="font-size: 12px;color:#3B91FF;margin-left: 10px;">*会员卡管理</span></div>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+<script src="/admin/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/admin/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'sample', 'echarts','colorpicker'],function (){
+        var $ = layui.$
+            ,form = layui.form
+            ,colorpicker = layui.colorpicker
+            ,admin = layui.admin, layer = layui.layer;
+            
+
+        var colorval="{$zhuticolor['val']}";
+        colorpicker.render({
+            elem: '#zhuticolor'
+            ,color:colorval
+            ,change: function(color){
+                $.post(
+                    "{:url('admin/diy/sethome')}",
+                    {"va":color,'st':'zhuticolor'},
+                    function(data,state){
+                        if(state != "success"){
+                            layer.msg("请求出错!");
+                        }else if(data.status == 1){
+                            layer.msg(data.msg);
+                            location.reload();
+                        }else{
+                            layer.msg(data.msg);
+                        }
+                    }
+                );
+            }
+        });
+
+        form.on('switch(switch1)', function(data) {
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'lunbo'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        form.on('switch(switch2)', function(data) {
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'gonggao'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        form.on('switch(switch3)', function(data) {
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'fangkuai'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        form.on('switch(switch4)', function(data) {
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'yuyue'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        // form.on('radio(filter)', function(data){
+        //     console.log(data.elem); //得到radio原始DOM对象
+        //     console.log(data.value); //被点击的radio的value值
+        // });
+        form.on('switch(switch5)', function(data) {
+            //var va=data.value;
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'shop'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        form.on('switch(switch6)', function(data) {
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'news'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        form.on('switch(switch7)', function(data) {
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'news'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        form.on('switch(switch8)', function(data) {
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'paymsg'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        form.on('switch(switch9)', function(data) {
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'opentickets'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        form.on('switch(switch10)', function(data) {
+            var va=this.checked ? 1 : 0;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'vip'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+        form.on('radio(switch11)', function(data) {
+            var va=data.value;
+            $.post(
+                "{:url('admin/diy/sethome')}",
+                {"va":va,'st':'template'},
+                function(data,state){
+                    if(state != "success"){
+                        layer.msg("请求出错!");
+                    }else if(data.status == 1){
+                        layer.msg(data.msg);
+                        location.reload();
+                    }else{
+                        layer.msg(data.msg);
+                    }
+                }
+            );
+        });
+    });
+    function openimg(img){
+        layer.open({
+            title: '预览图片'
+            ,content: "<img src='"+img+"' style='width: 100%'/>"
+        });
+    }
+</script>
+</body>
+</html>

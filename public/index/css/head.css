@@ -1,0 +1,98 @@
+/**顶部**/
+.index_top{
+    height: 32px;
+    background: #f4f4f4;
+    border-bottom: 1px solid #e6e6e6;
+}
+.index_xian{
+    width: 2px;
+    height: 14px;
+    background: #e6e6e6;
+}
+/**搜索框**/
+.search-box{
+    height: 80px;
+}
+.imgvie{
+    width: 140px;
+    height: 40px;
+}
+.search-view{
+    width: 460px;
+    height: 42px;
+    overflow: hidden;
+}
+.search-view input{
+    flex: 1;
+    height: 39px;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #ff2c3c;
+    border-right-width: 0;
+    padding: 0 10px;
+    outline: none;
+}
+.sear-btn{
+    width: 82px;
+    height: 42px;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+.search-btn{
+    cursor: pointer;
+    border-radius: 4px;
+    width: 108px;
+    height: 42px;
+    margin-left: 16px;
+}
+/**顶部导航栏**/
+.top_nav{
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+}
+.topnav1{
+    width: 212px;
+    height: 40px;
+}
+.topnav2{
+    padding: 0px 20px;
+    cursor: pointer;
+}
+.topnavri{
+    width: 988px;
+    height: 40px;
+    border-bottom: 1px solid #f1f1f1;
+}
+/**导航栏弹框**/
+.navlist{
+    width: 212px;
+    height: 372px;
+    background: #4b484d;
+    top:40px;
+    left:0px;
+    display: none;
+    padding: 14px 0;
+    z-index: 8;
+}
+.nav-item{
+    height: 35px;
+    line-height: 35px;
+    padding: 0 14px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+}
+/**分类框**/
+.navclass{
+    width: 988px;
+    height: 400px;
+    background: #ffffff;
+    box-shadow: 1px 0 5px rgba(0,0,0,.3);
+    top:0px;
+    left:212px;
+    display: none;
+    z-index: 8;
+}
+.classkuai{
+    border-left: 1px solid #f1f1f1;
+}

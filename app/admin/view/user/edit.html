@@ -1,0 +1,235 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layuiAdmin 网站用户 iframe 框</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+</head>
+<style>
+    @font-face {
+        font-family: 'iconfont';  /* Project id 2565954 */
+        src: url('https://at.alicdn.com/t/font_2565954_sign0pp5qp.woff2?t=1621862790306') format('woff2'),
+        url('https://at.alicdn.com/t/font_2565954_sign0pp5qp.woff?t=1621862790306') format('woff'),
+        url('https://at.alicdn.com/t/font_2565954_sign0pp5qp.ttf?t=1621862790306') format('truetype');
+    }
+    .iconfont{
+        font-family:"iconfont" !important;
+        font-size:16px;font-style:normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;}
+    </style>
+<body>
+	
+  <div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+		<input type="hidden" name="id" id="id" value="" />
+	  <div class="layui-form-item">
+		  <label class="layui-form-label">昵称</label>
+		  <div class="layui-input-inline">
+			  <input type="text" name="nick" id="nick"  placeholder="用户昵称" autocomplete="off" class="layui-input">
+		  </div>
+	  </div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">用户密码</label>
+			<div class="layui-input-inline">
+				<input type="text" name="password" id="password"  placeholder="留空则不修改 不建议修改" autocomplete="off" class="layui-input">
+			</div>
+		</div>
+
+	  <div class="layui-form-item">
+		  <label class="layui-form-label">用户头像</label>
+		  <div class="layui-input-inline">
+			  <input type="text" name="headimg" id="headimg"  placeholder="请上传用户头像" autocomplete="off" class="layui-input" >
+			  <img  id="imgx1" style="width:100px;">
+		  </div>
+		  <button style="float: left;" type="button" class="layui-btn" id="layuiadmin-upload-useradmin">上传图片</button>
+	  </div>
+
+      <!--<div class="layui-form-item">-->
+          <!--<label class="layui-form-label">账户余额</label>-->
+          <!--<div class="layui-input-inline" style="line-height: 40px;">-->
+              <!--<i class="iconfont" style="font-size:14px;color:#5FB878;cursor:pointer;" onclick="zj()" title="减少余额">&#xe659;</i>-->
+              <!--<span id="money">0.00</span>-->
+              <!--<i class="iconfont" style="font-size:14px;color:#5FB878;cursor:pointer;" onclick="js()" title="增加余额">&#xe60b;</i>-->
+              <!--&nbsp;&nbsp;<span style="font-size:12px;color:#1E9FFF;cursor:pointer;" id="murl">明细</span>-->
+          <!--</div>-->
+      <!--</div>-->
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">推荐人</label>
+          <div class="layui-input-block">
+              <select name="isyao" id="isyao" lay-verify="required">
+                  <option value="0">否</option>
+                  <option value="1">是</option>
+              </select>
+          </div>
+      </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">上级ID</label>
+          <div class="layui-input-inline">
+              <input type="text" name="rel1" id="rel1"  placeholder="上级ID" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">上上级ID</label>
+          <div class="layui-input-inline">
+              <input type="text" name="rel2" id="rel2"  placeholder="上上级ID" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">手机号</label>
+          <div class="layui-input-inline">
+              <input type="text" name="mobile" id="mobile"  placeholder="手机号" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+      <div class="layui-form-item">
+          <label class="layui-form-label">邮箱</label>
+          <div class="layui-input-inline">
+              <input type="text" name="email" id="email"  placeholder="邮箱" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+
+
+
+    <div class="layui-form-item" lay-filter="status">
+      <label class="layui-form-label">帐号状态</label>
+      <div class="layui-input-block">
+        <input type="radio" name="status" checked disabled  id="status" value="1" title="正常">
+        <input type="radio" name="status" disabled id="status" value="2" title="黑名单">
+      </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-front-submit" id="LAY-user-front-submit" value="确认">
+    </div>
+  </div>
+
+  <script src="/admin/layuiadmin/layui/layui.js"></script>
+  <script>
+  layui.config({
+    base: '/admin/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form', 'upload','element'], function(){
+    var $ = layui.$
+    ,form = layui.form
+    ,upload = layui.upload;
+    
+
+	upload.render({
+    elem: '#layuiadmin-upload-useradmin' //绑定元素
+    ,url: "{:url('admin/Index/upload')}" //上传接口
+	,ext: 'jpg|png|gif'//限制文件
+    ,done: function(res){
+      //上传完毕回调
+	  $(this.item).prev("div").children("input").val(res.filename)
+	 // document.getElementById('img').value = res.filename;
+	  layer.msg("上传成功");
+    }
+    ,error: function(){
+      //请求异常回调
+    }
+  });
+
+	
+
+
+
+
+  })
+
+
+
+
+	function zj(){
+		layui.use('layer', function(){
+		  var layer = layui.layer;
+		  var $ = layui.$;
+		var user=$("#id").val();
+		var mo=parseInt($("#money").text());
+
+		  layer.prompt({
+			  formType: 0,
+			  value: '0',
+			  title: '请输入要增加的金额'
+			}, function(value, index, elem){
+			  //alert(user); //得到value
+					var sm=$('#zxr').val();
+
+
+				$.post(
+    				"{:url('admin/User/zjmoney')}",
+    				{"st":1,'user':user,'money':value,'sm':sm},
+    				function(data,state){
+    					if(state != "success"){
+    						layer.msg("请求出错!");
+    					}else if(data.status == 1){
+							layer.msg('增加成功');
+							value=parseInt(value);
+							var ixx=parseInt(mo+value);
+							$("#money").text(ixx);
+    					}else{
+    						layer.msg(data.msg);
+    					}
+    				}
+    			);
+
+
+			  layer.close(index);
+			});
+			$(".layui-layer-content").append("<br/><input type=\"text\" id= \"zxr\" class=\"layui-input\" placeholder=\"输入说明\"/>");
+		}); 
+	}
+
+
+	function js(){
+		layui.use('layer', function(){
+		  var layer = layui.layer;
+		  var $ = layui.$;
+		  var user=$("#id").val();
+		  var mo=parseInt($("#money").text());
+		  
+		  layer.prompt({
+			  formType: 0,
+			  value: '0',
+			  title: '请输入要减少的金额'
+			}, function(value, index, elem){
+			  //alert(value); //得到value
+			  var sm=$('#zxr').val();
+
+				$.post(
+    				"{:url('admin/User/zjmoney')}",
+    				{"st":2,'user':user,'money':value,'sm':sm},
+    				function(data,state){
+    					if(state != "success"){
+    						layer.msg("请求出错!");
+    					}else if(data.status == 1){
+							layer.msg('减少成功');
+							value=parseInt(value);
+							var ixx=parseInt(mo-value);
+							$("#money").text(ixx);
+    					}else{
+    						layer.msg(data.msg);
+    					}
+    				}
+    			);
+
+			  layer.close(index);
+			});
+		 $(".layui-layer-content").append("<br/><input type=\"text\" id= \"zxr\" class=\"layui-input\" placeholder=\"输入说明\"/>");
+		}); 
+	}
+
+ 
+  </script>
+</body>
+</html>

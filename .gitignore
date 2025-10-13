@@ -1,0 +1,9 @@
+/.idea
+/.vscode
+*.log
+/runtime
+.env
+/待更新.txt
+/update.txt
+/auto.sql
+/update.sql

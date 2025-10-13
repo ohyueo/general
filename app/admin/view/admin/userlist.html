@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layuiAdmin 管理员列表</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/admin/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+
+<div class="layui-fluid">
+  <div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+      <div class="layui-form-item">
+
+        <div class="layui-inline">
+          <label class="layui-form-label">账号</label>
+          <div class="layui-input-block">
+            <input type="text" name="username" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+
+        <div class="layui-inline">
+          <label class="layui-form-label">用户名</label>
+          <div class="layui-input-block">
+            <input type="text" name="name" placeholder="请输入" id="name" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">角色</label>
+          <div class="layui-input-block">
+            <select name="role_id" lay-verify="required">
+              <option value="0">无</option>
+              {volist name="roles" id='role'}
+              <option value="{$role.id}">{$role.name}</option>
+              {/volist}
+            </select>
+          </div>
+        </div>
+        <div class="layui-inline">
+          <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-user-front-search">
+            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="layui-card-body">
+      <div style="padding-bottom: 10px;">
+        {in name="$data.add" value="$permis"}
+        <button class="layui-btn layuiadmin-btn-useradmin" data-type="add">添加</button>
+        {/in}
+        {in name="$data.del" value="$permis"}
+        <button class="layui-btn layuiadmin-btn-useradmin" data-type="del">删除</button>
+        {/in}
+      </div>
+
+      <table class="layui-table" lay-data="{ url:'/admin/admin/userlist',method:'post', page:true, id:'LAY-user-managet'}" lay-filter="LAY-user-managet">
+        <thead>
+        <tr>
+          <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
+          <th lay-data="{field:'id', width:120, sort: true}">ID</th>
+          <th lay-data="{field:'username'}">账号</th>
+          <th lay-data="{field:'name'}">用户名</th>
+          <th lay-data="{field:'role'}">角色</th>
+          <th lay-data="{field:'addtime',templet:'#addtime'}">加入时间</th>
+          <th lay-data="{field:'lastlogin',templet:'#lastlogin'}">上次登录时间</th>
+          <th lay-data="{field:'status',templet:'#status'}">状态</th>
+          <th lay-data="{fixed: 'right', width:150, align:'center', toolbar: '#barDemo'}">操作</th>
+        </tr>
+        </thead>
+      </table>
+      <script type="text/html" id="addtime">
+        {{# if(d.addtime){ }}
+        {{getLocalTime(d.addtime)}}
+        {{# }else{ }}
+        无
+        {{# } }}
+      </script>
+      <script type="text/html" id="lastlogin">
+        {{# if(d.lastlogin){ }}
+        {{getLocalTime(d.lastlogin)}}
+        {{# }else{ }}
+        无
+        {{# } }}
+      </script>
+      <script type="text/html" id="status">
+        {{# if(d.status == 0){ }}
+        待审核
+        {{# }else if(d.status == 1){ }}
+        正常
+        {{# }else{ }}
+        禁止登录
+        {{# } }}
+      </script>
+      <script type="text/html" id="barDemo">
+        {{# if(d.id != '1'){ }}
+        {in name="$data.edit" value="$permis"}
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-event="edit"><i class="layui-icon layui-icon-edit"></i>编辑</a>
+        {/in}
+        {in name="$data.del" value="$permis"}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+        {/in}
+        {{# } }}
+      </script>
+    </div>
+  </div>
+</div>
+
+<style>
+  select{
+    border: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+  select::-ms-expand { display: none; }
+</style>
+
+<script src="/admin/js/public.js"></script>
+<script src="/admin/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/admin/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'useradmin', 'table','laydate','layedit'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,table = layui.table,laydate = layui.laydate
+            ,layedit = layui.layedit;
+
+        //监听搜索
+        form.on('submit(LAY-user-front-search)', function(data){
+            var field = data.field;
+            $.post("{:url('admin/admin/userlist')}", field, function(data,state){});
+            //执行重载
+            table.reload('LAY-user-managet', {
+                where: field
+            });
+        });
+
+//监听工具条
+        table.on('tool(LAY-user-managet)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+
+            if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除行么', function(index){
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                    var dataid=data['id'];
+                    //向服务端发送删除指令
+                    $.post(
+                        "{:url('admin/admin/deluser')}",
+                        {"id":dataid},
+                        function(data,state){
+                            if(state != "success"){
+                                layer.msg("请求出错!");
+                            }else if(data.status == 1){
+                                table.reload('LAY-user-managet');
+                                layer.msg('已删除');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    );
+
+                });
+            } else if(layEvent === 'edit'){ //编辑
+                var id=data['id'];
+                var name=data['name'];
+                var username=data['username'];
+                var role_id=data['role_id'];
+                //do something
+                layer.open({
+                    type: 2
+                    ,title: '修改管理员资料'
+                    ,content: 'edituser.html?id='+id
+                    ,maxmin: true
+                    ,area: ['500px', '450px']
+                    ,btn: ['确定', '取消']
+                    ,success: function(layero,index){
+                        var body = layui.layer.getChildFrame('body', index);
+                        body.find("#id").val(id);
+                        body.find("#name").val(name);
+                        body.find("#role_id").val(role_id);
+                        body.find("#username").val(username);
+                        form.render();
+                    }
+                    ,yes: function(index, layero){
+                        var iframeWindow = window['layui-layer-iframe'+ index]
+                            ,submitID = 'LAY-user-front-submit'
+                            ,submit = layero.find('iframe').contents().find('#'+ submitID);
+
+                        //监听提交
+                        iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
+                            var field = data.field; //获取提交的字段
+
+                            $.post(
+                                "{:url('admin/admin/edituser')}",
+                                field,
+                                function(data,state){
+                                    if(state != "success"){
+                                        layer.msg("请求出错!");
+                                    }else if(data.status == 1){
+                                        table.reload('LAY-user-managet'); //数据刷新
+                                        layer.msg('修改成功');
+                                    }else if (data.status == 2){
+                                        layer.msg(data.msg);
+                                    } else {
+                                        layer.msg(data.msg);
+                                    }
+                                }
+                            );
+                            layer.close(index); //关闭弹层
+                        });
+
+                        submit.trigger('click');
+                    }
+                });
+
+            }
+        });
+        //事件
+        var active = {
+            del: function(){
+                var checkStatus = table.checkStatus('LAY-user-managet')
+                    ,checkData = checkStatus.data; //得到选中的数据
+                if(checkData.length === 0){
+                    return layer.msg('请选择数据');
+                }
+                var dataid='';
+                for(var i=0;i<checkData.length;i++){
+                    dataid=dataid+','+checkData[i]['id'];
+                }
+                layer.confirm('确定删除吗？', function(index) {
+                    $.post(
+                        "{:url('admin/admin/deluser')}",
+                        {"id":dataid},
+                        function(data,state){
+                            if(state != "success"){
+                                layer.msg("请求出错!");
+                            }else if(data.status == 1){
+                                table.reload('LAY-user-managet');
+                                layer.msg('已删除');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    );
+
+                });
+                //
+            }
+            ,add: function(){
+                layer.open({
+                    type: 2
+                    ,title: '添加管理员'
+                    ,content: 'adduser.html'
+                    ,maxmin: true
+                    ,area: ['500px', '450px']
+                    ,btn: ['确定', '取消']
+                    ,yes: function(index, layero){
+                        var iframeWindow = window['layui-layer-iframe'+ index]
+                            ,submitID = 'LAY-user-front-submit'
+                            ,submit = layero.find('iframe').contents().find('#'+ submitID);
+                        //监听提交
+                        iframeWindow.layui.form.on('submit('+ submitID +')', function(data){
+                            var field = data.field; //获取提交的字段
+                            //提交 Ajax 成功后，静态更新表格中的数据
+                            //$.ajax({});
+                            $.post(
+                                "{:url('admin/admin/adduser')}",
+                                field,
+                                function(data,state){
+                                    if(state != "success"){
+                                        layer.msg("请求出错!");
+                                    }else if(data.status == 1){
+                                        layer.msg('添加成功');
+                                    }else{
+                                        layer.msg(data.msg);
+                                    }
+                                }
+                            );
+                            table.reload('LAY-user-managet'); //数据刷新
+                            layer.close(index); //关闭弹层
+                        });
+                        submit.trigger('click');
+                    }
+                });
+            }
+        };
+        $('.layui-btn.layuiadmin-btn-useradmin').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+
+</body>
+</html>

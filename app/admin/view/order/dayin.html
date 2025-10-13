@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试打印</title>
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="测试打印,"/>
+    <meta name="description" content="测试打印,"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+</head>
+<script src="/index/js/CLodopfuncs.js"></script>
+<script src="/index/js/CLodopfuncs.js?priority=1"></script>
+<script language="javascript" src="/index/js/LodopFuncs.js"></script>
+<body>
+
+<div id="div2">
+
+    <style>table,th{border:none;height:28px;color:#0085F9;} td{border: 1px solid #0085F9;height:30px;font-size:13px;text-indent:2px;}
+    .tdtit{
+        font-weight: bold;
+        text-align: center;
+        font-size: 14px;
+    }
+
+    .tdtit2{
+        width: 22%;
+        font-size: 14px;
+    }
+
+        .bootx{
+            display: flex;
+            flex-direction: row;
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+            font-size: 14px;
+        }
+        .boobtn{
+            width: 140px;
+            height: 40px;
+            background: #0085F9;
+            border-radius: 20px;
+            color: #ffffff;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+        }
+    </style>
+
+    <table border="0" cellspacing="0" cellpadding="0" width="100%" height="200" bordercolor="#000000" style="border-collapse:collapse;">
+        <caption style="margin-top:20px;margin-bootom:10px;"><b><font face="黑体" color="#0085F9" size="4">UP摄影工作室（Up摄影工作室）</font></b></caption>
+        <thead>
+        <tr>
+            <th width="100%" style="text-align: right;" colspan="8"></th>
+        </tr>
+        <tr>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="tdtit">拍摄日期</td>
+            <td class="tdtit2" id="name"></td>
+            <td class="tdtit">订单日期</td>
+            <td class="tdtit2" id="phone"></td>
+            <td class="tdtit">拍摄档期</td>
+            <td class="tdtit2" id="kemu"></td>
+        </tr>
+        <tr>
+            <td class="tdtit">姓名</td>
+            <td class="tdtit2"></td>
+            <td class="tdtit">性别</td>
+            <td class="tdtit2"></td>
+            <td class="tdtit">订单全款</td>
+            <td class="tdtit2"></td>
+        </tr>
+        <tr>
+            <td width="11%" class="tdtit">备注</td>
+            <td width="89%" colspan="5" >
+                温馨提示：
+                1 证件照产品单日可取，形象照、写真产品 7个自然日取片，如需加急服务，需另支付产品总价50%作为服务费
+                2 一经签名确认，选作精修的照片不予更换
+                3本店拍摄所有产品均不提供拍摄原始底片，如需购买底片，请详询门店进行购买。
+                4 150妆容费 儿童60
+                5 加片价格为 证件照30 个人写真80 结婚登记照60 两人及以上100
+            </td>
+        </tr>
+
+        <tr>
+            <td  class="tdtit">加修/加印</td>
+            <td  class="tdtit2"></td>
+            <td  class="tdtit">门市顾问</td>
+            <td  class="tdtit2"></td>
+            <td  class="tdtit">顾客签字</td>
+            <td  class="tdtit2"></td>
+        </tr>
+
+        <tr>
+            <td  class="tdtit">摄影师</td>
+            <td  class="tdtit2"></td>
+            <td  class="tdtit">化妆师</td>
+            <td  class="tdtit2"></td>
+            <td  class="tdtit">后期</td>
+            <td  class="tdtit2"></td>
+        </tr>
+        </tbody>
+
+    </table>
+</div>
+
+<div class="bootx">
+    <div class="boobtn" onclick="CheckIsInstall()">查看本机是否安装</div>
+    <div class="boobtn" onclick="Preview1()" style="margin-left: 30px;">打印单据</div>
+    <!--<a href="javascript:CheckIsInstall()">查看本机是否安装(控件或web打印服务)</a>-->
+    <!--<a href="javascript:Preview1()">打印单据</a>-->
+</div>
+
+
+</body>
+<script>
+    var LODOP; //声明为全局变量
+    function Preview1() {
+        LODOP=getLodop();
+        LODOP.PRINT_INITA(0,0,"190mm","85mm","打印控件功能演示_Lodop功能_自定义纸张1");
+        LODOP.SET_PRINT_PAGESIZE(0,"190mm","85mm");
+        AddPrintContent("10101010101010","郭德强");
+        LODOP.PREVIEW();
+    };
+    function AddPrintContent(strCode,strName) {
+        //LODOP.SET_PRINT_STYLE("FontColor",16711680);
+        LODOP.SET_PRINT_STYLE("FontColor",'#0085F9');
+        LODOP.SET_PRINT_STYLE("FontName","隶书");
+// 		LODOP.SET_PRINT_STYLE("FontSize",14);
+// 		//LODOP.ADD_PRINT_RECT(62,16,459,217,0,1);
+// 		LODOP.ADD_PRINT_TEXT(100,400,300,40,"策勒天勤考场模拟票收款收据");
+        LODOP.ADD_PRINT_TABLE(0,'5%',"90%","85mm",document.getElementById("div2").innerHTML);
+// 		LODOP.SET_PRINT_STYLEA(2,"FontName","隶书");
+// 		LODOP.SET_PRINT_STYLEA(2,"FontSize",11);
+// 		LODOP.SET_PRINT_STYLEA(2,"FontColor",0);
+// 		LODOP.ADD_PRINT_TEXT(41,213,100,20,"2008年11月9日");
+// 		LODOP.ADD_PRINT_TEXT(17,281,100,20,"个人业务受理书");
+// 		LODOP.SET_PRINT_STYLEA(4,"FontColor",0);
+// 		LODOP.ADD_PRINT_TEXT(75,37,431,20,"机构:109110 交易代码:010110");
+// 		LODOP.ADD_PRINT_TEXT(102,37,431,20,"个人网银用户签约成功！");
+// 		LODOP.ADD_PRINT_TEXT(129,37,431,20,"网点名称：东城分行营业部");
+// 		LODOP.ADD_PRINT_TEXT(156,37,431,20,"主卡卡号："+strCode);
+// 		LODOP.ADD_PRINT_TEXT(183,37,431,20,"客户姓名："+strName);
+// 		LODOP.ADD_PRINT_TEXT(212,37,431,20,"登陆方式：用户名登陆");
+// 		LODOP.ADD_PRINT_TEXT(17,218,60,20,"东城分行");
+// 		LODOP.ADD_PRINT_TEXT(249,169,221,20,"以上内容已核实确认无误，客户签名：");
+// 		LODOP.ADD_PRINT_TEXT(106,484,23,127,"第二联客户留联");
+// 		LODOP.SET_PRINT_STYLEA(13,"FontColor",0);
+// 		LODOP.ADD_PRINT_TEXT(284,21,74,20,"授权员");
+// 		LODOP.SET_PRINT_STYLEA(14,"FontColor",0);
+// 		LODOP.ADD_PRINT_TEXT(284,200,74,20,"复核员");
+// 		LODOP.SET_PRINT_STYLEA(15,"FontColor",0);
+// 		LODOP.ADD_PRINT_TEXT(284,346,74,20,"经办员");
+// 		LODOP.SET_PRINT_STYLEA(16,"FontColor",0);
+    };
+    function CheckIsInstall() {
+        try{
+            var LODOP=getLodop();
+            if (LODOP.VERSION) {
+                if (LODOP.CVERSION)
+                    alert("当前有WEB打印服务C-Lodop可用!\n C-Lodop版本:"+LODOP.CVERSION+"(内含Lodop"+LODOP.VERSION+")");
+                else
+                    alert("本机已成功安装了Lodop控件！\n 版本号:"+LODOP.VERSION);
+
+            };
+        }catch(err){
+
+        }
+    };
+</script>

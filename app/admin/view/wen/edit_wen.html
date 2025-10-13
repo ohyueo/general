@@ -1,0 +1,214 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layuiAdmin 网站用户 iframe 框</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+</head>
+<body>
+
+
+  <div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+	<div class="layui-form-item">
+      <label class="layui-form-label">新闻标题</label>
+      <div class="layui-input-inline">
+        <input type="text" name="title" lay-verify="required" placeholder="请输入新闻标题" autocomplete="off" class="layui-input" id="title">
+      </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">新闻分类</label>
+        <div class="layui-input-inline">
+            <select name="classid" lay-verify="required"  id="classid" lay-search>
+                <option value="0">请选择</option>
+                {volist name="list" id="vo"}
+                <option value="{$vo.id}">{$vo.title}</option>
+                {/volist}
+            </select>
+        </div>
+    </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">新闻图片200*200</label>
+          <div class="layui-input-inline">
+              <input type="text" name="img" id="img"  placeholder="请上传图片" autocomplete="off" class="layui-input" >
+              <img  id="imgx1" style="width:100px;">
+          </div>
+          <button style="float: left;" type="button" class="layui-btn" id="layuiadmin-upload-useradmin">上传图片</button>
+      </div>
+
+      <div class="layui-form-item">
+          <label class="layui-form-label">浏览量</label>
+          <div class="layui-input-inline">
+              <input type="text" name="pv" id="pv"  placeholder="浏览量" autocomplete="off" class="layui-input">
+          </div>
+      </div>
+
+	    <input type="hidden" name="id" id="id"/>
+
+		<div class="layui-form-item">
+            <label class="layui-form-label">新闻内容</label>
+            <div class="layui-input-block">
+                <textarea id="texter" lay-verify="content" name="texter" style="display: none;"></textarea>
+			</div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">打开地址</label>
+            <div class="layui-input-inline">
+                <input type="text" name="openurl" id="openurl"  placeholder="打开地址，填了就会跳转这个网址" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        
+
+      <div class="layui-form-item" lay-filter="status">
+          <label class="layui-form-label">是否推荐到首页</label>
+          <div class="layui-input-block">
+              <input type="radio" name="istui" checked  id="istui" value="1" title="推荐">
+              <input type="radio" name="istui"  id="istui" value="0" title="不推荐">
+          </div>
+      </div>
+
+      <div class="layui-form-item" lay-filter="status">
+          <label class="layui-form-label">状态</label>
+          <div class="layui-input-block">
+              <input type="radio" name="status" checked  id="status" value="1" title="上线">
+              <input type="radio" name="status"  id="status" value="2" title="下线">
+          </div>
+      </div>
+
+
+
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-front-submit" id="LAY-user-front-submit" value="确认">
+    </div>
+  </div>
+
+  <script src="/admin/layuiadmin/layui/Layui-KnifeZ/layui.js"></script>
+  <script src="/admin/layuiadmin/layui/ace/ace.js"></script>
+  <script>
+  layui.config({
+    base: '/admin/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form', 'upload','layedit'], function(){
+    var $ = layui.$
+    ,form = layui.form
+    ,upload = layui.upload
+	,layedit = layui.layedit;
+
+      upload.render({
+          elem: '#layuiadmin-upload-useradmin' //绑定元素
+          ,url: "{:url('admin/Index/upload')}" //上传接口
+          ,ext: 'jpg|png|gif'//限制文件
+          ,done: function(res){
+              //上传完毕回调
+              $(this.item).prev("div").children("input").val(res.filename);
+              $("#imgx1").attr('src', res.filename);
+              // document.getElementById('img').value = res.filename;
+              layer.msg("上传成功");
+          }
+          ,error: function(){
+              //请求异常回调
+          }
+      });
+
+      layedit.set({
+          //暴露layupload参数设置接口 --详细查看layupload参数说明
+          uploadImage: {
+              url: "{:url('/admin/Index/uploadtxt')}",
+              accept: 'image',
+              acceptMime: 'image/*',
+              exts: 'jpg|png|gif|bmp|jpeg',
+              size: '10240'
+          }
+          , uploadVideo: {
+              url: "{:url('/admin/Index/uploadVideo')}",
+              accept: 'video',
+              acceptMime: 'video/*',
+              exts: 'mp4|flv|avi|rm|rmvb',
+              size: '20480'
+          },
+          uploadAudio: {
+              url: "{:url('/admin/Index/uploadAudio')}",
+              accept: 'audio',
+              acceptMime: 'audio/*',
+              exts: 'mp3|m4a|wma|amr|ape|flac|aac'
+          }
+          //右键删除图片/视频时的回调参数，post到后台删除服务器文件等操作，
+          //传递参数：
+          //图片： imgpath --图片路径
+          //视频： filepath --视频路径 imgpath --封面路径
+          , calldel: {
+              url: "{:url('/admin/Index/delUploadVideo')}"
+          }
+          //开发者模式 --默认为false
+          , devmode: false
+          //是否自动同步到textarea
+          , autoSync: true
+          ,onchange: function (content) {
+              console.log(content);
+          }
+          //插入代码设置
+          , codeConfig: {
+              hide: true,  //是否显示编码语言选择框
+              default: 'javascript' //hide为true时的默认语言格式
+          }
+          , tool: [
+              'html', //显示富文本源码
+              'undo', //撤销
+              'redo',//重做
+              'code', //代码
+              'strong',//加粗
+              'italic', //斜体
+              'underline', //下划线
+              'del', //删除线
+              'addhr', //水平线
+              '|',
+              'removeformat', //清楚文字样式
+              'fontFomatt',//段落格式
+              'fontfamily',//字体
+              'fontSize', //字体大小
+              'fontBackColor',//字体背景色
+              'colorpicker',//字体颜色
+              'face',//表情
+              '|',
+              'left', //左对齐
+              'center', //居中
+              'right', //右对齐
+              '|',
+              'link', //链接
+//              'unlink', //清除链接
+//              'images', //多图上传
+              'image_alt', //图片alt
+              'video',//视频
+//              'attachment',//插入附件
+              'anchors'//添加锚点
+              , '|'
+              , 'table',//表格
+              'customlink'//自定义链接
+              , 'fullScreen'//全屏
+          ]
+          , height: '90%'
+      });
+      var ieditor = layedit.build('texter');
+      layedit.sync(ieditor);
+      form.verify({
+          content: function(value) {
+              return layedit.sync(ieditor);
+          }
+      });
+
+
+  })
+
+
+
+  </script>
+</body>
+</html>

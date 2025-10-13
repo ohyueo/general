@@ -1,0 +1,87 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>layuiAdmin 编辑角色 iframe 框</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+  <script src="//at.alicdn.com/t/font_740160_3xa79sjup14.js"></script>
+  <style>
+    .icon {
+       width: 1em; height: 1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+     color:#AEAEAE;
+    }
+  </style>
+</head>
+<body>
+  
+  <div class="layui-form" lay-filter="layuiadmin-form-useradmin" id="layuiadmin-form-useradmin" style="padding: 20px 0 0 0;">
+    <input type="hidden" name="id" value="{$role.id}">
+    <div class="layui-form-item">
+      <label class="layui-form-label">角色名称</label>
+      <div class="layui-input-inline" style="line-height: 40px;color:red;" id="mobile">
+        <input type="text" name="name" id="name"  placeholder="请输入" autocomplete="off" class="layui-input" value="{$role.name}">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">描述</label>
+      <div class="layui-input-inline">
+        <input type="text" name="text" id="password"  placeholder="请输入" autocomplete="off" class="layui-input"  value="{$role.text}">
+      </div>
+    </div>
+
+    <div class="layui-form-item" lay-filter="status">
+      <label class="layui-form-label">权限</label>
+      <div class="layui-input-block">
+        {volist name="permis" id="mis" key="k"}
+
+          {eq name="$mis['level']" value ='0'}
+          <br />
+          {/eq}
+          {eq name="$mis['level']" value ='1'}
+          <br /><br/>
+          {/eq}
+          {eq name="$mis['level']" value ='1'}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {/eq}
+          {eq name="$mis['level']" value ='2'}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          {/eq}
+          <input type="checkbox" name="limits[]" lay-skin="primary" title="{$mis.name}" value="{$mis.id}" {in name="$mis.id" value="$role.permission_id"}checked{/in}>
+          <div class="layui-unselect layui-form-checkbox" lay-skin="primary">
+            <span>{$mis.name}</span>
+            <i class="layui-icon layui-icon-ok"></i>
+          </div>
+          {eq name="$mis['level']" value ='1'}
+          <br />
+          {/eq}
+        {/volist}
+      </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+      <input type="button" lay-submit lay-filter="LAY-user-front-submit" id="LAY-user-front-submit" value="确认">
+    </div>
+  </div>
+
+  <script src="/admin/layuiadmin/layui/layui.js"></script>
+  <script>
+  layui.config({
+    base: '/admin/layuiadmin/' //静态资源所在路径
+  }).extend({
+    index: 'lib/index' //主入口模块
+  }).use(['index', 'form', 'upload','element'], function(){
+    var $ = layui.$
+    ,form = layui.form
+    ,upload = layui.upload ;
+  })
+
+</script>
+</body>
+</html>

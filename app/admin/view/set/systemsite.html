@@ -1,0 +1,166 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>网站设置</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/admin/layuiadmin/style/admin.css" media="all">
+</head>
+<body>
+<form class="layui-form" action="/admin/set/systemsite" method="post">
+    <div class="layui-fluid">
+        <div class="layui-row layui-col-space15">
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <div class="layui-card-header">系统设置</div>
+                    <div class="layui-card-body">
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">开启共享地址</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="switch1" value="{:config('-systemsite.wxgxadd')}" lay-verify="required"  name="wxgxadd"
+                                       {if condition="config('-systemsite.wxgxadd')==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">开启后姓名 手机号 地址可以获取微信共享地址</div>
+                        </div>
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">是否开启推广</label>
+                            <div class="layui-input-inline">
+                                <input type="checkbox" lay-filter="switch2" value="{:config('-systemsite.istui')}" lay-verify="required"  name="istui"
+                                       {if condition="config('-systemsite.istui')==1"} checked {/if} lay-skin="switch" lay-text="启用|关闭">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">开启则推广生效</div>
+                        </div>
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">上级分成</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sys_userrel1mo"  value="{:config('-systemsite.sys_userrel1mo')}" placeholder="上级分成" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">推荐客户进来下单，师傅分多少钱，订单总额的百分比</div>
+                        </div>
+
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">上上级分成</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sys_userrel2mo"  value="{:config('-systemsite.sys_userrel2mo')}" placeholder="上上级分成" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">推荐客户进来下单，师傅的师傅分多少钱，订单总额的百分比</div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">邀请说明</label>
+                            <div class="layui-input-inline" style="width:500px;">
+                                <textarea name="sys_invitationmsg" class="layui-textarea" placeholder="邀请说明">{:config('-systemsite.sys_invitationmsg')}</textarea>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">邀请规则说明</div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">首页新闻文字</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sys_indexnewwen"  value="{:config('-systemsite.sys_indexnewwen')}" placeholder="新闻文字" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">首页的新闻动态显示对应的文字</div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">订票须知</label>
+                            <div class="layui-input-inline" style="width:500px;">
+                                <textarea name="sys_dingpiaomsg" class="layui-textarea" placeholder="订票须知">{:config('-systemsite.sys_dingpiaomsg')}</textarea>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">在订单提交页面弹框，不填则不显示</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">核销方式</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="sys_hexiao_type" value="0"  title="核销员核销" {if condition="config('-systemsite.sys_hexiao_type')==0"} checked {/if}>
+                                <input type="radio" name="sys_hexiao_type" value="1" title="签到码核销" {if condition="config('-systemsite.sys_hexiao_type')==1"} checked {/if}>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">核销的方式：1、核销员核销：此核销方式需要核销员使用手机扫码核销，2、签到码核销：使用签到码，用户扫签到码自行核销（此方式注意签到码是静态的，容易作弊，可考虑动态签到码）</div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">签到定位</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="sys_qiandao_isdingwei" value="0" title="否" {if condition="config('-systemsite.sys_qiandao_isdingwei')==0"} checked {/if}>
+                                <input type="radio" name="sys_qiandao_isdingwei" value="1" title="是" {if condition="config('-systemsite.sys_qiandao_isdingwei')==1"} checked {/if}>
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">是否开启签到定位，开启定位后签到需要核对位置距离</div>
+                        </div>
+                        <div class="layui-form-item layui-form-text">
+                            <label class="layui-form-label">签到距离</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="sys_qiandao_julino"  value="{:config('-systemsite.sys_qiandao_julino')}" placeholder="签到距离" class="layui-input">
+                            </div>
+                            <div class="layui-form-mid layui-word-aux">距离多少米之内的可以签到成功</div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <input type="submit" class="layui-btn" value="确认保存">
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+<script src="/admin/layuiadmin/layui/layui.js"></script>
+<script src="/admin/layuiadmin/jq/jquery.js"></script>
+<script>
+    layui.config({
+        base: '/admin/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'form', 'upload','layedit'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,upload = layui.upload,layedit = layui.layedit;
+        form.on('switch(switch1)', function(data) {
+            $(data.elem).attr('type', 'hidden').val(this.checked ? 1 : 0);
+        });
+        form.on('switch(switch2)', function(data) {
+            $(data.elem).attr('type', 'hidden').val(this.checked ? 1 : 0);
+        });
+        upload.render({
+            elem: '#layuiadmin-upload-useradmin' //绑定元素
+            ,url: "{:url('/admin/Index/upload')}" //上传接口
+            ,ext: 'jpg|png|gif'//限制文件
+            ,done: function(res){
+                //上传完毕回调
+                $(this.item).prev("div").children("input").val(res.filename);
+                document.getElementById('img1').src = res.filename;
+                layer.msg("上传成功");
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+        upload.render({
+            elem: '#layuiadmin-upload-useradmin2' //绑定元素
+            ,url: "{:url('/admin/Index/upload')}" //上传接口
+            ,ext: 'jpg|png|gif'//限制文件
+            ,done: function(res){
+                //上传完毕回调
+                $(this.item).prev("div").children("input").val(res.filename);
+                document.getElementById('img2').src = res.filename;
+                layer.msg("上传成功");
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+
+        });
+
+
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>选项卡组件</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="/admin/layuiadmin/style/admin.css" media="all">
+</head>
+<style>
+    .h4{
+        font-size: 15px;
+        color: #000;
+        font-weight: bold;
+    }
+    @font-face {
+        font-family: 'iconfont';  /* Project id 2565954 */
+        src: url('https://at.alicdn.com/t/font_2565954_sign0pp5qp.woff2?t=1621862790306') format('woff2'),
+        url('https://at.alicdn.com/t/font_2565954_sign0pp5qp.woff?t=1621862790306') format('woff'),
+        url('https://at.alicdn.com/t/font_2565954_sign0pp5qp.ttf?t=1621862790306') format('truetype');
+    }
+    .iconfont{
+        font-family:"iconfont" !important;
+        font-size:16px;font-style:normal;
+        -webkit-font-smoothing: antialiased;
+        -webkit-text-stroke-width: 0.2px;
+        -moz-osx-font-smoothing: grayscale;}
+    .layui-layer-admin .layui-layer-ico {
+      background: url("/admin/layuiadmin/gb.png") no-repeat!important;
+      background-size:16px 16px!important;
+      /*background-position: 0px -40px!important;*/
+    }
+</style>
+<body>
+
+
+<div class="layui-fluid" id="component-tabs">
+    <div class="layui-row">
+        <div class="layui-col-md12" style="margin-bottom: 15px">
+            <div class="layui-card">
+                <div class="layui-card-header">基本信息</div>
+                <div class="layui-card-body">
+                    <div class="layui-row  layadmin-homepage-padding15">
+                    <div class="layui-col-md12 layadmin-homepage-padding8">
+                        <div class="layui-row layadmin-homepage-text-center">
+                            <input type="hidden" name="id" id="id" value="{$user.id}" />
+                            <div class="layui-col-md2 layui-col-sm3 layui-col-xs3" style="display:flex;flex-direction: row;align-items: center;">
+                                <img src="{$user.headimg}" style="width: 50px;height:50px;border-radius: 25px;">
+                                <div style="margin-left: 10px;">
+                                    <p class="h4">
+                                        <span id="nick">{$user.nick}</span>
+                                        <i onclick='setuserInfo("{$user.nick}",1)' style="font-size:15px;color:#FF6A00;cursor:pointer;" class="layui-icon layui-icon-edit"></i>
+                                    </p>
+                                    <mdall>用户昵称</mdall>
+                                </div>
+                            </div>
+                            <div class="layui-col-md2 layui-col-sm3 layui-col-xs3">
+                                <p class="h4">
+                                    <span id="mobile">{$user.mobile}</span>
+                                    <i onclick='setuserInfo("{$user.mobile}",2)' style="font-size:15px;color:#FF6A00;cursor:pointer;" class="layui-icon layui-icon-edit"></i>
+                                </p>
+                                <mdall>手机号</mdall>
+                            </div>
+                            <!--<div class="layui-col-md2 layui-col-sm3 layui-col-xs3">-->
+                            <!--    <p class="h4">-->
+                            <!--        <span id="email">{$user.email}</span>-->
+                            <!--        <i onclick='setuserInfo("{$user.email}",3)' style="font-size:15px;color:#FF6A00;cursor:pointer;" class="layui-icon layui-icon-edit"></i>-->
+                            <!--    </p>-->
+                            <!--    <mdall>邮箱</mdall>-->
+                            <!--</div>-->
+                            <!--<div class="layui-col-md2 layui-col-sm3 layui-col-xs3">-->
+                            <!--    <p class="h4">-->
+                            <!--        <i class="iconfont" style="font-size:14px;color:#FF6A00;cursor:pointer;" onclick="zj()" title="减少余额">&#xe659;</i>-->
+                            <!--        <span style="margin: 0 4px;" id="money">{$user.money}</span>-->
+                            <!--        <i class="iconfont" style="font-size:14px;color:#FF6A00;cursor:pointer;" onclick="js()" title="增加余额">&#xe60b;</i>-->
+                                    <!--<i class="layui-icon layui-icon-edit" style="color:#FF6A00;"></i>-->
+                            <!--    </p>-->
+                            <!--    <mdall>用户余额</mdall>-->
+                            <!--</div>-->
+                            <div class="layui-col-md2 layui-col-sm3 layui-col-xs3">
+                                <p class="h4">{$user.reg_time}</p>
+                                <mdall>注册时间</mdall>
+                            </div>
+                            <div class="layui-col-md2 layui-col-sm3 layui-col-xs3">
+                                <p class="h4">{$user.rece_login_time}</p>
+                                <mdall>登录时间</mdall>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">记录状态</div>
+                <div class="layui-card-body">
+                    <div class="layui-tab layui-tab-brief" lay-filter="component-tabs-hash">
+                        <ul class="layui-tab-title">
+                            <li class="layui-this" lay-id="11">订单管理</li>
+                            <!--<li lay-id="22">订单管理</li>-->
+                            <!--<li lay-id="33">会员地址</li>-->
+                            <!--<li lay-id="44">收藏记录</li>-->
+                            <!--<li lay-id="55">浏览记录</li>-->
+                        </ul>
+                        <div class="layui-tab-content">
+                            <div class="layui-tab-item layui-show">
+                                <table class="layui-table" lay-data="{ url:'/admin/Order/orderlist',method:'post',where:{uid:'{$user.id}'}, page:true, id:'LAY-user-managet'}" lay-filter="LAY-user-managet">
+                                    <thead>
+                                    <tr>
+                                        <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
+                                        <th lay-data="{field:'id', width:120, sort: true}">ID</th>
+                                        <th lay-data="{field:'headimg',templet:'#img'}">预约项目</th>
+                                        <th lay-data="{field:'y_data'}">预约日期</th>
+                                        <th lay-data="{field:'y_time'}">预约时间</th>
+                                        <th lay-data="{templet:'#biaono'}">提交信息</th>
+                                        <th lay-data="{templet:'#time'}">预约时间 / 完成时间</th>
+                                        <th lay-data="{templet:'#user', width:160,style:'height:30px'}">用户/预约信息</th>
+                                        <th lay-data="{field:'status',templet:'#status'}">状态</th>
+                                    </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                            <div class="layui-tab-item">
+                                内容3
+                            </div>
+                            <div class="layui-tab-item">内容4</div>
+                            <div class="layui-tab-item">内容5</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--order-->
+    <script type="text/html" id="which">
+          <span style="font-size:14px;font-weight:bold">第{{d.which}}号</span>
+        </script>
+        <script type="text/html" id="shop_money">
+          {{d.yuyue_zno}} / {{d.yuyue_zno}}
+        </script>
+    <script type="text/html" id="biaono">
+        <span style="color: #1E9FFF;cursor:pointer" lay-event="biaolist"  title="提交信息">
+                {{d.ordno}}点击查看
+                <i class="layui-icon layui-icon-search"></i>
+                </span>
+    </script>
+    <script type="text/html" id="user">
+        <span style="color: #FF6A00;cursor:pointer" lay-href="/admin/User/userinfo?id={{d.uid}}" title="买家信息">
+            {{d.nick}}
+            <i class="layui-icon layui-icon-search"></i>
+          </span>
+    </script>
+    <script type="text/html" id="time">
+        <span  lay-event="hao_time">
+                {{d.addtime}}
+                <i class="layui-icon layui-icon-search" style="cursor:pointer"></i>
+              </span>
+    </script>
+    <script type="text/html" id="source">
+        <i class="iconfont" title="手机网页">&#xe633;</i>
+        <i class="iconfont" title="苹果APP">&#xe63d;</i>
+        <i class="iconfont" title="安卓APP">&#xe63e;</i>
+        <i class="iconfont" title="PC网站">&#xe620;</i>
+    </script>
+    <script type="text/html" id="status">
+        {{# if(d.status==1){ }}
+        <span style="color: #CCCCCC;">待付款</span>
+
+        {{# }else if(d.status==2){ }}
+        <span style="color: #17D783;">待核销</span>
+
+        {{# }else if(d.status==3){ }}
+        <span style="color: #17D783;">已完成</span>
+
+        {{# }else if(d.status==4){ }}
+        <span style="color: #CCCCCC;">已取消</span>
+
+        {{# }else if(d.status==5){ }}
+        <span style="color: #FF6A00;">取消预约</span>
+        {{# }else if(d.status==6){ }}
+        <span style="color: #17D783;">叫号成功</span>
+
+        {{# }else{ }}
+        其他
+        {{# } }}
+        </script>
+    <script type="text/html" id="mobilex">
+        {{# if(d.mobile){ }}
+        {{d.mobile}}
+        {{# }else{ }}
+        未绑定
+        {{# } }}
+    </script>
+    <script type="text/html" id="img">
+              <span lay-href="/admin/Yuyue/yuyuelist?id={{d.list_id}}" style="color: #FF6A00;cursor:pointer;margin-left: 4px;" title="预约信息">
+                {{d.title}}
+                <i class="layui-icon layui-icon-search"></i>
+              </span>
+          </script>
+
+    <script src="/admin/layuiadmin/layui/layui.js"></script>
+    <script>
+        layui.config({
+            base: '/admin/layuiadmin/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use(['index','table'], function(){
+            var $ = layui.$
+                ,admin = layui.admin
+                ,table = layui.table
+                ,element = layui.element
+                ,router = layui.router();
+
+            element.render();
+
+            element.on('tab(component-tabs-brief)', function(obj){
+                layer.msg(obj.index + '：' + this.innerHTML);
+            });
+            
+            //监听工具条
+      table.on('tool(LAY-user-managet)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+          var data = obj.data; //获得当前行数据
+          var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+          var tr = obj.tr; //获得当前行 tr 的DOM对象
+          if(layEvent==='hao_time'){
+              var addtime=data['addtime'];
+              var uptime=data['uptime'];
+              if(!uptime){
+                  uptime='无';
+              }
+              layer.open({
+                  title:'预约信息',
+                  type: 1,
+                  skin: 'layui-layer-admin',
+                  closeBtn: true,
+                  area: '350px',
+                  anim: 5,
+                  shadeClose: true,
+                  content: "<div style='padding:20px;'>预约时间："+addtime+"<br/>完成时间："+uptime+
+                  "</div>"
+              });
+          }else
+          if(layEvent === 'biaolist'){ //弹框地址
+              var res=data['res'];
+              var tit='';
+              if(res){
+                  for(var i=0;i<res.length;i++){
+                      if(res[i].type!=5){
+                          tit+="<div style='padding:10px;'>"+res[i].name+"："+res[i].val+"<br/></div>";
+                      }else{
+                          tit+="<div style='padding:10px;'>"+res[i].name+"：<a href='"+res[i].val+"' target='_blank'><img src='"+res[i].val+"' style='width:50px;height:50px;'></a><br/></div>";
+                      }
+
+                  }
+              }
+              layer.open({
+                  title:'订单提交内容',
+                  type: 1,
+                  skin: 'layui-layer-admin',
+                  closeBtn: true,
+                  area: '350px',
+                  anim: 5,
+                  shadeClose: true,
+                  content: tit
+              });
+          }
+      })
+
+            /* 触发事件 */
+            var active = {
+                tabAdd: function(){
+                    /* 新增一个Tab项 */
+                    element.tabAdd('demo', {
+                        title: '新选项'+ (Math.random()*1000|0) /* 用于演示 */
+                        ,content: '内容'+ (Math.random()*1000|0)
+                        ,id: new Date().getTime() /* 实际使用一般是规定好的id，这里以时间戳模拟下 */
+                    })
+                }
+                ,tabDelete: function(othis){
+                    /* 删除指定Tab项 */
+                    element.tabDelete('demo', '22');
+                    othis.addClass('layui-btn-disabled');
+                }
+                ,tabChange: function(){
+                    /* 切换到指定Tab项 */
+                    element.tabChange('demo', '33');
+                }
+            };
+
+            $('#component-tabs .site-demo-active').on('click', function(){
+                var othis = $(this), type = othis.data('type');
+                active[type] ? active[type].call(this, othis) : '';
+            });
+
+            /* Hash地址的定位 */
+            var layid = router.hash.replace(/^#layid=/, '');
+            layid && element.tabChange('component-tabs-hash', layid);
+
+            element.on('tab(component-tabs-hash)', function(elem){
+                location.hash = '/'+ layui.router().path.join('/') + '#layid=' + $(this).attr('lay-id');
+            });
+        });
+
+        function zj(){
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                var $ = layui.$;
+                var user=$("#id").val();
+                var mo=parseInt($("#money").text());
+
+                layer.prompt({
+                    formType: 0,
+                    value: '0',
+                    title: '请输入要增加的金额'
+                }, function(value, index, elem){
+                    //alert(user); //得到value
+                    var sm=$('#zxr').val();
+
+
+                    $.post(
+                        "{:url('admin/User/zjmoney')}",
+                        {"st":1,'user':user,'money':value,'sm':sm},
+                        function(data,state){
+                            if(state != "success"){
+                                layer.msg("请求出错!");
+                            }else if(data.status == 1){
+                                layer.msg('增加成功');
+                                value=parseInt(value);
+                                var ixx=parseInt(mo+value);
+                                $("#money").text(ixx);
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    );
+
+
+                    layer.close(index);
+                });
+                $(".layui-layer-content").append("<br/><input type=\"text\" id= \"zxr\" class=\"layui-input\" placeholder=\"输入说明\"/>");
+            });
+        }
+
+
+        function js(){
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                var $ = layui.$;
+                var user=$("#mobile").text();
+                var mo=parseInt($("#money").text());
+
+                layer.prompt({
+                    formType: 0,
+                    value: '0',
+                    title: '请输入要减少的金额'
+                }, function(value, index, elem){
+                    //alert(value); //得到value
+                    var sm=$('#zxr').val();
+
+                    $.post(
+                        "{:url('admin/User/zjmoney')}",
+                        {"st":2,'user':user,'money':value,'sm':sm},
+                        function(data,state){
+                            if(state != "success"){
+                                layer.msg("请求出错!");
+                            }else if(data.status == 1){
+                                layer.msg('减少成功');
+                                value=parseInt(value);
+                                var ixx=parseInt(mo-value);
+                                $("#money").text(ixx);
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    );
+
+                    layer.close(index);
+                });
+                $(".layui-layer-content").append("<br/><input type=\"text\" id= \"zxr\" class=\"layui-input\" placeholder=\"输入说明\"/>");
+            });
+        }
+
+        function setuserInfo(vx,st){
+            layui.use('layer', function(){
+                var layer = layui.layer;
+                var $ = layui.$;
+                var user=$("#id").val();
+
+                layer.prompt({
+                    formType: 0,
+                    value: vx,
+                    title: '请输入要修改的'
+                }, function(value, index, elem){
+                    //alert(value); //得到value
+
+                    $.post(
+                        "{:url('admin/User/setuserInfo')}",
+                        {'id':user,'value':value,'st':st},
+                        function(data,state){
+                            if(state != "success"){
+                                layer.msg("请求出错!");
+                            }else if(data.status == 1){
+                                layer.msg('修改成功');
+                                if(st==1){
+                                    $("#nick").text(value);
+                                }else if(st==2){
+                                    $("#mobile").text(value);
+                                }else if(st==3){
+                                    $("#email").text(value);
+                                }else if(st==4){
+                                    $("#name").text(value);
+                                }else if(st==5){
+                                    $("#sex").text(value);
+                                }
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    );
+
+                    layer.close(index);
+                });
+            });
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+.logincent{
+    width: 1200px;
+    height: 100%;
+    top: 0px;
+    left: 50%;
+    z-index: 9;
+    margin-left: -600px;
+}
+.loginri{
+    padding: 40px 60px;
+    background: #ffffff;
+    border: solid 1px #E6E6E6;
+}
+.login_top{
+    width: 320px;
+    height: 46px;
+    line-height: 46px;
+    margin-bottom: 30px;
+    position: relative;
+    border-bottom: solid 1px #eee;
+}
+.login_top div{
+    height: 100%;
+    width: 50%;
+    text-align: center;
+}
+.account_btn i,.phone_btn i{
+    /*display: none;*/
+    position: absolute;
+    width: 70px;
+    height: 4px;
+    bottom: -1px;
+    left: 50%;
+    margin-left: -35px;
+}
+.logli{
+    width: 320px;
+    height: 46px;
+    line-height: 46px;
+    margin-bottom: 30px;
+    border:1px solid #eeeeee;
+    border-radius: 10px;
+}
+.logleft{
+    width: 40px;
+    height: 46px;
+    text-align: center;
+    line-height: 46px;
+}
+.logright{
+    width: 280px;
+    height: 46px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logput{
+    width: 270px;
+    height: 42px;
+    border: none;
+    outline: none;
+    font-size: 13px;
+}
+.logput2{
+    width: 170px;
+    height: 42px;
+    border: none;
+    outline: none;
+    font-size: 13px;
+}
+.yzbtn{
+    width: 100px;
+    height: 42px;
+    font-size: 13px;
+    text-align: center;
+    line-height: 42px;
+}
+.logbtn{
+    height: 46px;
+    border-radius: 10px;
+}
+.account{
+
+}
+.log_phone{
+    display: none;
+}

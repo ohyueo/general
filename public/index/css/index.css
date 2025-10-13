@@ -1,0 +1,55 @@
+.swiper-container {
+    width: 100%;
+    height: 400px;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+/* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+.shoplist{
+    width: 100%;
+    height: 100%;
+    padding:0 0 20px 0;
+    background: #F2F2F2;
+}
+.shopflexxxx{
+    width: 244px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.shopflex{
+    width: 224px;
+    height: 300px;
+    background: #FFFFFF;
+    /*margin-right: 20px;*/
+}
+/**如果太多则隐藏了**/
+.clistnav{
+    max-height: 630px;
+    overflow: hidden;
+}
+.shopflexxxx:hover{
+    -webkit-transform: translate3d(0, -2px, 0);
+    transform: translate3d(0, -2px, 0);
+    z-index: 9;
+}
+/*.shopflex:nth-child(5n) {*/
+    /*margin-right: 0;*/
+/*}*/

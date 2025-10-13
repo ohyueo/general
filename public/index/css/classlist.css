@@ -1,0 +1,30 @@
+.topnavli{
+    padding: 6px 0;
+    width: 1160px;
+    margin: auto;
+    line-height: 30px;
+    border-bottom: 1px dashed #e5e5e5;
+}
+.shopflexxxx{
+    width: 244px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.shopflex{
+    width: 224px;
+    height: 300px;
+    background: #FFFFFF;
+    /*margin-right: 20px;*/
+}
+.shopflexxxx:hover{
+    -webkit-transform: translate3d(0, -2px, 0);
+    transform: translate3d(0, -2px, 0);
+    z-index: 9;
+}
+.titvie{
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    margin-top: 10px;
+}

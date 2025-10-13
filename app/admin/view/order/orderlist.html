@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>商品管理</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="/admin/layuiadmin/layui/css/layui.css" media="all">
+  <link rel="stylesheet" href="/admin/layuiadmin/style/admin.css" media="all">
+  <style>
+    @font-face {
+      font-family: 'iconfont';  /* Project id 2565954 */
+      src: url('https://at.alicdn.com/t/font_2565954_q2snf28joy.woff2?t=1621766073287') format('woff2'),
+      url('https://at.alicdn.com/t/font_2565954_q2snf28joy.woff?t=1621766073287') format('woff'),
+      url('https://at.alicdn.com/t/font_2565954_q2snf28joy.ttf?t=1621766073287') format('truetype');
+    }
+    .iconfont{
+      font-family:"iconfont" !important;
+      font-size:16px;font-style:normal;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-stroke-width: 0.2px;
+      -moz-osx-font-smoothing: grayscale;}
+    .layui-layer-admin .layui-layer-ico {
+      background: url("/admin/layuiadmin/gb.png") no-repeat!important;
+      background-size:16px 16px!important;
+      /*background-position: 0px -40px!important;*/
+    }
+  </style>
+</head>
+<body>
+
+<div class="layui-fluid">
+  <div class="layui-card">
+    <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+      <div class="layui-form-item">
+        <div class="layui-inline">
+          <label class="layui-form-label">订单ID</label>
+          <div class="layui-input-block">
+            <input type="text" name="id" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">预约id</label>
+          <div class="layui-input-block">
+            <input type="text" name="acid" placeholder="请输入" value="{$lid}" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">预约日期</label>
+          <div class="layui-input-block">
+            <input type="text" name="y_data" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+        <div class="layui-inline">
+          <label class="layui-form-label">用户id</label>
+          <div class="layui-input-block">
+            <input type="text" name="uid" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-inline">
+          <label class="layui-form-label">状态</label>
+          <div class="layui-input-block">
+            <select name="status">
+              <option value="0">请选择</option>
+              <option value="1">待付款</option>
+              <option value="2">待核销</option>
+              <option value="3">已完成</option>
+              <option value="4">已取消</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="layui-inline">
+          <label class="layui-form-label">搜索字段</label>
+          <div class="layui-input-block">
+            <select name="form_id">
+              <option value="0">请选择</option>
+              {volist name="list" id="vo"}
+              <option value="{$vo.id}">{$vo.title}</option>
+              {/volist}
+            </select>
+          </div>
+        </div>
+
+        <div class="layui-inline">
+          <label class="layui-form-label">搜索内容</label>
+          <div class="layui-input-block">
+            <input type="text" name="val" placeholder="请输入" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-inline">
+          <label class="layui-form-label">开始时间</label>
+          <div class="layui-input-block">
+            <input type="text" name="str" placeholder="请输入" id="time2" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-inline">
+          <label class="layui-form-label">结束时间</label>
+          <div class="layui-input-block">
+            <input type="text" name="end" placeholder="请输入" id="time3" autocomplete="off" class="layui-input">
+          </div>
+        </div>
+
+        <div class="layui-inline">
+          <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="LAY-user-front-search">
+            <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+          </button>
+          {in name="$data.daochu && $lid" value="$permis"}
+          <button class="layui-btn layuiadmin-btn-useradmin" lay-submit lay-filter="order-daochu">
+            <span>导出数据</span>
+          </button>
+          {/in}
+        </div>
+      </div>
+    </div>
+    <div class="layui-card-body">
+      <div style="padding-bottom: 10px;display:flex;flex-direction:row;justify-content: space-between;">
+        <div>
+          {in name="$data.del" value="$permis"}
+          <button class="layui-btn layuiadmin-btn-useradmin" data-type="del">删除</button>
+          {/in}
+        </div>
+        <div></div>
+
+
+      </div>
+      <table class="layui-table" lay-data="{ url:'/admin/Order/orderlist',method:'post',where:{acid:'{$lid}'} ,autoSort: false, page:true, id:'LAY-user-managet'}" lay-filter="LAY-user-managet">
+        <thead>
+        <tr>
+          <th lay-data="{type: 'checkbox', fixed: 'left'}"></th>
+          <th lay-data="{field:'id', width:120, sort: true}">ID</th>
+          <th lay-data="{field:'headimg',templet:'#img'}">预约项目</th>
+          <th lay-data="{field:'y_data', sort: true}">预约日期</th>
+          <th lay-data="{field:'y_time'}">预约时间</th>
+          {if condition="$zwno>0"}
+          <th lay-data="{field:'seat'}">选择座位</th>
+          {/if}
+          {if condition="$ryno>0"}
+          <th lay-data="{field:'person'}">选择人员</th>
+          {/if}
+          {if condition="$gno>0"}
+          <th lay-data="{field:'spec'}">选择规格</th>
+          {/if}
+          <th lay-data="{templet:'#number'}">预约人数</th>
+          <th lay-data="{templet:'#biaono'}">提交信息</th>
+          <th lay-data="{templet:'#time'}">预约时间 / 完成时间</th>
+          <th lay-data="{templet:'#user', width:160,style:'height:30px'}">用户/预约信息</th>
+          <th lay-data="{field:'status',templet:'#status'}">状态</th>
+          <th lay-data="{fixed: 'right', width:330, align:'center', toolbar: '#barDemo'}">操作</th>
+        </tr>
+        </thead>
+      </table>
+      <script type="text/html" id="number">
+        {{d.number}}
+        {{# if(d.heno>0){ }}
+        <span style="color: #17D783;">({{d.heno}}次)</span>
+        {{# } }}
+      </script>
+      <script type="text/html" id="which">
+        <span style="font-size:14px;font-weight:bold">第{{d.which}}号</span>
+      </script>
+      <script type="text/html" id="shop_money">
+        {{d.no}} / {{d.yuyue_zno}}
+      </script>
+      <script type="text/html" id="biaono">
+        <span style="color: #1E9FFF;cursor:pointer" lay-event="biaolist"  title="提交信息">
+          {{d.ordno}}点击查看
+          <i class="layui-icon layui-icon-search"></i>
+        </span>
+      </script>
+      <script type="text/html" id="user">
+        <span style="color: #FF6A00;cursor:pointer" lay-href="/admin/User/userinfo?id={{d.uid}}" title="买家信息">
+            {{d.nick}}
+            <i class="layui-icon layui-icon-search"></i>
+          </span>
+      </script>
+      <script type="text/html" id="time">
+        <span  lay-event="hao_time">
+          {{d.addtime}}
+          <i class="layui-icon layui-icon-search" style="cursor:pointer"></i>
+        </span>
+      </script>
+
+      <script type="text/html" id="status">
+        {{# if(d.status==1){ }}
+        <span style="color: #CCCCCC;">待付款</span>
+
+        {{# }else if(d.status==2){ }}
+        <span style="color: #17D783;">待核销</span>
+
+        {{# }else if(d.status==3){ }}
+        <span style="color: #17D783;">已完成</span>
+
+        {{# }else if(d.status==4){ }}
+        <span style="color: #CCCCCC;">已取消</span>
+
+        {{# }else if(d.status==5){ }}
+        <span style="color: #FF6A00;">取消预约</span>
+        {{# }else if(d.status==6){ }}
+        <span style="color: #17D783;">叫号成功</span>
+
+        {{# }else{ }}
+        其他
+        {{# } }}
+      </script>
+      <script type="text/html" id="mobile">
+        {{# if(d.mobile){ }}
+        {{d.mobile}}
+        {{# }else{ }}
+        未绑定
+        {{# } }}
+      </script>
+      <script type="text/html" id="img">
+        <span lay-href="/admin/Yuyue/yuyuelist?id={{d.list_id}}" style="color: #FF6A00;cursor:pointer;margin-left: 4px;" title="预约信息">
+                {{d.title}}
+                <i class="layui-icon layui-icon-search"></i>
+              </span>
+      </script>
+      <script type="text/html" id="barDemo">
+        {in name="$data.dayin" value="$permis"}
+        {{# if(d.status==3){ }}
+        <a class="layui-btn layui-bg-cyan layui-btn-xs" lay-event="dayin"><i class="layui-icon layui-icon-print"></i>打印</a>
+        {{# } }}
+        {/in}
+        {in name="$data.edit" value="$permis"}
+        {{# if(d.status==1){ }}
+        <a class="layui-btn layui-bg-green layui-btn-xs" lay-event="fukuan"><i class="layui-icon layui-icon-ok"></i>线下付款</a>
+        {{# } }}
+        {{# if(d.status==1){ }}
+        <a class="layui-btn layui-bg-cyan layui-btn-xs" lay-event="quxiao"><i class="layui-icon layui-icon-close"></i>取消订单</a>
+        {{# } }}
+        {{# if(d.status==2){ }}
+        <a class="layui-btn layui-bg-green layui-btn-xs" lay-event="wancheng"><i class="layui-icon layui-icon-praise"></i>已完成</a>
+        {{# } }}
+        {/in}
+        {in name="$data.info" value="$permis"}
+        <a class="layui-btn layui-btn-normal layui-btn-xs" lay-href="/admin/Order/info?id={{d.id}}" lay-text="订单详情"><i class="layui-icon layui-icon-search"></i>详情</a>
+        {/in}
+        {in name="$data.del" value="$permis"}
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del"><i class="layui-icon layui-icon-delete"></i>删除</a>
+        {/in}
+      </script>
+    </div>
+
+
+
+
+  </div>
+</div>
+
+<script src="/admin/layuiadmin/layui/layui.js"></script>
+<script>
+    layui.config({
+        base: '/admin/layuiadmin/' //静态资源所在路径
+    }).extend({
+        index: 'lib/index' //主入口模块
+    }).use(['index', 'useradmin', 'table','laydate'], function(){
+        var $ = layui.$
+            ,form = layui.form
+            ,table = layui.table;
+
+        var  laydate = layui.laydate;
+		    //执行一个laydate实例
+        laydate.render({
+            elem: '#time2' //指定元素
+            ,type: 'datetime'
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#time3' //指定元素
+            ,type: 'datetime'
+        });
+
+        //触发排序事件
+        table.on('sort(LAY-user-managet)', function(obj){ //注：sort 是工具条事件名，test 是 table 原始容器的属性 lay-filter="对应的值"
+            console.log(obj.field); //当前排序的字段名
+            console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
+            console.log(this); //当前排序的 th 对象
+
+            //尽管我们的 table 自带排序功能，但并没有请求服务端。
+            //有些时候，你可能需要根据当前排序的字段，重新向服务端发送请求，从而实现服务端排序，如：
+            table.reload('LAY-user-managet', {
+                initSort: obj //记录初始排序，如果不设的话，将无法标记表头的排序状态。
+                ,where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                    field: obj.field //排序字段
+                    ,order: obj.type //排序方式
+                }
+            });
+        });
+
+        //搜索角色
+        form.on('submit(LAY-user-front-search)', function(data){
+            var field = data.field;
+            $.post("{:url('admin/Order/orderlist')}", field, function(data,state){});
+            //执行重载
+            table.reload('LAY-user-managet', {
+                where: field
+            });
+        });
+
+        //导出数据
+        form.on('submit(order-daochu)', function(data){
+            var field = data.field;
+            var id=field.id;
+            var uid=field.uid;
+            var acid=field.acid;
+            var status=field.status;
+            var form_id=field.form_id;
+            var val=field.val;
+            var y_data=field.y_data;
+            window.location.href='/admin/Order/daochu?id='+id+'&uid='+uid+'&acid='+acid+'&status='+status+'&form_id='+form_id+'&val='+val+'&y_data='+y_data;
+        });
+
+        //监听工具条
+        table.on('tool(LAY-user-managet)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            var data = obj.data; //获得当前行数据
+            var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+            var tr = obj.tr; //获得当前行 tr 的DOM对象
+            if(layEvent==='hao_time'){
+                var addtime=data['addtime'];
+                var uptime=data['uptime'];
+                if(!uptime){
+                    uptime='无';
+                }
+                layer.open({
+                    title:'预约信息',
+                    type: 1,
+                    skin: 'layui-layer-admin',
+                    closeBtn: true,
+                    area: '350px',
+                    anim: 5,
+                    shadeClose: true,
+                    content: "<div style='padding:20px;'>预约时间："+addtime+"<br/>完成时间："+uptime+
+                    "</div>"
+                });
+            }else
+            if(layEvent === 'biaolist'){ //弹框地址
+                var res=data['res'];
+                var tit='';
+                if(res){
+                    for(var i=0;i<res.length;i++){
+                        if(res[i].type!=5){
+                            tit+="<div style='padding:10px;'>"+res[i].name+"："+res[i].val+"<br/></div>";
+                        }else{
+                            tit+="<div style='padding:10px;'>"+res[i].name+"：<a href='"+res[i].val+"' target='_blank'><img src='"+res[i].val+"' style='width:50px;height:50px;'></a><br/></div>";
+                        }
+
+                    }
+                }
+                layer.open({
+                    title:'订单提交内容',
+                    type: 1,
+                    skin: 'layui-layer-admin',
+                    closeBtn: true,
+                    area: '350px',
+                    anim: 5,
+                    shadeClose: true,
+                    content: tit
+                });
+            }
+            else if(layEvent === 'wancheng'){ //编辑
+                var dataid=data['id'];
+                //向服务端发送删除指令
+                $.post(
+                    "{:url('admin/Order/edit')}",
+                    {"id":dataid,'st':3},
+                    function(data,state){
+                        if(state != "success"){
+                            layer.msg("请求出错!");
+                        }else if(data.status == 1){
+                            table.reload('LAY-user-managet');
+                            layer.msg(data.msg);
+                        }else{
+                            layer.msg(data.msg);
+                        }
+                    }
+                );
+            }else
+            if(layEvent === 'del'){ //删除
+                layer.confirm('真的删除当前订单吗', function(index){
+                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                    layer.close(index);
+                    var dataid=data['id'];
+                    //向服务端发送删除指令
+                    $.post(
+                        "{:url('admin/Order/del')}",
+                        {"id":dataid},
+                        function(data,state){
+                            if(state != "success"){
+                                layer.msg("请求出错!");
+                            }else if(data.status == 1){
+                                table.reload('LAY-user-managet');
+                                layer.msg('已删除');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    );
+                });
+            } else if(layEvent === 'fukuan'){ //编辑
+                var dataid=data['id'];
+                //向服务端发送删除指令
+                $.post(
+                    "{:url('admin/Order/edit')}",
+                    {"id":dataid,'st':2},
+                    function(data,state){
+                        if(state != "success"){
+                            layer.msg("请求出错!");
+                        }else if(data.status == 1){
+                            table.reload('LAY-user-managet');
+                            layer.msg(data.msg);
+                        }else{
+                            layer.msg(data.msg);
+                        }
+                    }
+                );
+            }
+            else if(layEvent === 'dayin'){ //编辑
+                //do something
+                var id=data['id'];
+                var money=0;
+                //do something
+                layer.open({
+                    type: 2
+                    ,title: '确认打印信息'
+                    ,content: 'dayin.html?id='+id+'&money='+money
+                    ,maxmin: true
+                    ,area: ['800px', '450px']
+                    //,btn: ['取消']
+                    ,success: function(layero,index){
+                        var body = layui.layer.getChildFrame('body', index);
+                        //body.find("#id").text('NO:'+id);
+                        form.render();
+                    }
+                    ,yes: function(index, layero){
+
+                    }
+                });
+            }
+            else if(layEvent === 'quxiao'){ //编辑
+                var dataid=data['id'];
+                //向服务端发送删除指令
+                $.post(
+                    "{:url('admin/Order/edit')}",
+                    {"id":dataid,'st':4},
+                    function(data,state){
+                        if(state != "success"){
+                            layer.msg("请求出错!");
+                        }else if(data.status == 1){
+                            table.reload('LAY-user-managet');
+                            layer.msg(data.msg);
+                        }else{
+                            layer.msg(data.msg);
+                        }
+                    }
+                );
+            }
+        });
+
+        //事件
+        var active = {
+            del: function(){
+                var checkStatus = table.checkStatus('LAY-user-managet')
+                    ,checkData = checkStatus.data; //得到选中的数据
+                if(checkData.length === 0){
+                    return layer.msg('请选择数据');
+                }
+                var dataid='';
+                for(var i=0;i<checkData.length;i++){
+                    dataid=dataid+','+checkData[i]['id'];
+                }
+                layer.confirm('确定删除选中数据吗？', function(index) {
+                    $.post(
+                        "{:url('/admin/Order/del')}",
+                        {"id":dataid},
+                        function(data,state){
+                            if(state != "success"){
+                                layer.msg("请求出错!");
+                            }else if(data.status == 1){
+                                table.reload('LAY-user-managet');
+                                layer.msg('已删除');
+                            }else{
+                                layer.msg(data.msg);
+                            }
+                        }
+                    );
+                });
+                //
+            }
+        }
+        $('.layui-btn.layuiadmin-btn-useradmin').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+</body>
+</html>
+
