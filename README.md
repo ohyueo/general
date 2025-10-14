@@ -50,7 +50,16 @@
 
 安装教程：https://www.ohyu.cn/index/help/detail/id/68
 
+前端也开源了，前端使用uniapp开发，适配了微信公众号、微信小程序、手机H5 三端：https://github.com/ohyueo/generaluniapp
 
+### 打赏
+如果项目对你有用，请不要吝啬请我喝个咖啡。  
+
+<img alt="微信" src="http://www.ohyu.cn/static/img/pay/wx.png" width="250px" height="280px" style="float:left;">
+<img alt="支付宝" src="http://www.ohyu.cn/static/img/pay/zfb.png" width="250px" height="280px" style="float:left;">
+
+我认为：软件本身最终都应该是免费的。
+我有一个梦想：那就是让全世界都用上我们的软件产品。
 
 
 
