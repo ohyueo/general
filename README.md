@@ -59,10 +59,10 @@
 <img alt="支付宝" src="http://www.ohyu.cn/static/img/pay/zfb.png" width="250px" height="280px" style="float:left;">
 
 ### 打赏
-关于本项目：本项目使用THINKPHP 6.0开发，遵循Apache 2.0协议。
-我认为：软件本身最终都应该是免费的。
-我有一个梦想：那就是让全世界都用上我们的软件产品。
-邮箱：chenhaijiang@ohyu.cn
+*关于本项目：本项目使用THINKPHP 6.0开发，遵循Apache 2.0协议。
+*我认为：软件本身最终都应该是免费的。
+*我有一个梦想：那就是让全世界都用上我们的软件产品。
+*邮箱：chenhaijiang@ohyu.cn
 
 
 
