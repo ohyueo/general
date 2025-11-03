@@ -1,1 +1,0 @@
-<?php return ['yue_strtime'=>'','yue_dayno'=>'3','time_yuedayno'=>'15','time_advnotime'=>'','time_paydaoqi'=>'10','yue_tuitime'=>'72','yue_tuitimetit'=>'距离预定时间前48小时(含)以上退票的，不收取退票费；距离预定时间前24小时以上、不足48小时的按票价20%计收取退票费，不足24小时的按票价30%计收取退票费。','prominxno'=>'1','time_autohe'=>'30','time_weiyueno'=>'3','time_weiyueday'=>'30',]; 

@@ -7,3 +7,9 @@
 /update.txt
 /auto.sql
 /update.sql
+/config/-appsite.php
+/config/-mapsite.php
+/config/-smssite.php
+/config/-systemsite.php
+/config/-wxsite.php
+/config/-timesite.php

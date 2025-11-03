@@ -1,1 +1,0 @@
-<?php return ['app_company'=>'成都海之心科技公司','app_logoimg'=>'/storage/admin_images/20220517/2c9322c2178599d37fc4bdfb83c13bdd.jpg','file'=>'','app_name'=>'海之心通用预约系统','app_desc'=>'海之心通用预约系统简介','app_version'=>'1.0.7','app_domainname'=>'http://www.ty.com/','web_keep'=>'111号','app_phone'=>'','app_time'=>'','app_address'=>'','app_lat'=>'30.523359','app_lng'=>'104.012452',]; 
