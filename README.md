@@ -35,6 +35,9 @@
 
 ### 功能展示
 <img src="https://www.ohyu.cn/ueditor/php/upload/image/20220519/1652950104120826.jpg" width="800px" height="1200px"/>
+<img src="https://www.ohyu.cn/ueditor/php/upload/image/20220520/1653009024839108.png" width="800px" height="340px"/>
+<img src="https://www.ohyu.cn/ueditor/php/upload/image/20220520/1653009030188063.png" width="800px" height="340px"/>
+
 
 ### 提供服务
 * 如果你搞不定，可以找我们提供一条龙服务

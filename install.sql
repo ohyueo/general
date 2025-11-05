@@ -159,6 +159,8 @@ INSERT INTO `general_admin_permission` VALUES
 (114,'删除表单','Yuyue','delform',24,1,NULL,0)
 ;
 
+
+
 CREATE TABLE IF NOT EXISTS `general_admin_role` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(50) NOT NULL COMMENT '角色名称',
@@ -616,6 +618,9 @@ CREATE TABLE IF NOT EXISTS `general_signin_signmsg` (
   `addtime` datetime DEFAULT NULL COMMENT '签到时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='签到记录';
+
+/*在general_admin_permission表中增加type和addons*/
+ALTER TABLE `general_admin_permission` ADD `type` int(3) DEFAULT '1' COMMENT '类型 1 2', ADD `addons` varchar(255) DEFAULT NULL COMMENT '插件名称';
 
 
 
