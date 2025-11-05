@@ -17,6 +17,7 @@ use app\BaseController;
 use think\Request;
 use app\validate\api\yue;
 use think\facade\Db;
+use think\facade\Log;
 use think\facade\Cache;
 use app\handler\YuyueListmsgHandler;
 use app\models\GeneralYuyueSeat;

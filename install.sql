@@ -149,7 +149,6 @@ INSERT INTO `general_admin_permission` VALUES
 (104,'修改分类','Shop/shopclass','edit',101,0,NULL,0),
 (105,'商品订单','Shop','orderlist',96,1,NULL,0),
 (106,'删除','Shop/orderlist','del',105,0,NULL,0),
-(107,'提醒设置','Set','remindsite',85,1,NULL,0),
 (108,'预约人员','Yuyue','yuyuepersonnel',23,1,NULL,6),
 (109,'添加','Yuyue/yuyuepersonnel','addperson',108,0,NULL,0),
 (110,'修改','Yuyue/yuyuepersonnel','editperson',108,0,NULL,0),
@@ -298,6 +297,8 @@ CREATE TABLE IF NOT EXISTS `general_yuyue_list` (
   `istui` int(3) DEFAULT '0',
   `is_info` int(3) DEFAULT '1',
   `recommended` varchar(155) DEFAULT NULL COMMENT '',
+  `startingday` int(11) DEFAULT '0' COMMENT '起始天数',
+  `heno` int(11) DEFAULT '0' COMMENT '核销次数',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='';
 CREATE TABLE IF NOT EXISTS `general_yuyue_img` (
@@ -621,6 +622,68 @@ CREATE TABLE IF NOT EXISTS `general_signin_signmsg` (
 
 /*在general_admin_permission表中增加type和addons*/
 ALTER TABLE `general_admin_permission` ADD `type` int(3) DEFAULT '1' COMMENT '类型 1 2', ADD `addons` varchar(255) DEFAULT NULL COMMENT '插件名称';
+
+
+CREATE TABLE IF NOT EXISTS `general_yuyue_ordermultiple` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `list_id` int(11) DEFAULT '0' COMMENT '预约id',
+  `order_id` int(11) DEFAULT '0' COMMENT '订单id',
+  `y_time` varchar(32) DEFAULT NULL COMMENT '预约时间',
+  `y_data` date DEFAULT NULL COMMENT '预约日期',
+  `status` int(3) DEFAULT '0' COMMENT '状态 1待付款 2待核销 3已完成 4已取消  5已退款',
+  `addtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `number` int(11) DEFAULT '1' COMMENT '预约人数',
+  `uid` int(11) DEFAULT '0',
+  `y_start_time` time DEFAULT NULL COMMENT '预约开始时间',
+  `y_end_time` time DEFAULT NULL COMMENT '预约结束时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='子订单信息';
+
+CREATE TABLE `general_default_defaultlist` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(155) DEFAULT 'NULL' COMMENT '标题',
+  `uid` int(11) DEFAULT '0' COMMENT '用户',
+  `listid` int(11) DEFAULT '0' COMMENT '项目id',
+  `orderid` int(11) DEFAULT '0' COMMENT '订单id',
+  `adtime` datetime DEFAULT NULL COMMENT '添加时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='违约记录';
+
+INSERT INTO `general_admin_permission` VALUES 
+(127,'预约规格','Yuyue','yuyuespec',23,1,'',0,1,''),(128,'添加','Yuyue/yuyuespec','addyuyuespec',127,0,'',0,1,''),
+(129,'修改','Yuyue/yuyuespec','edityuyuespec',127,0,'',0,1,''),(130,'删除','Yuyue/yuyuespec','delyuyuespec',127,0,'',0,1,''),
+(131,'新闻分类','Wen','wenclass',2,1,'',0,1,''),(132,'添加','Wen/wenclass','addwenclass',131,0,'',0,1,''),
+(133,'修改','Wen/wenclass','editwenclass',131,0,'',0,1,''),(134,'删除','Wen/wenclass','delwenclass',131,0,'',0,1,''),
+(135,'签到管理','Signin',NULL,0,1,'layui-icon-component',3,1,''),(136,'签到二维码','Signin','codelist',135,1,'',0,1,''),
+(137,'添加','Signin/codelist','addcodelist',136,0,'',0,1,''),(138,'修改','Signin/codelist','editcodelist',136,0,'',0,1,''),
+(139,'删除','Signin/codelist','delcodelist',136,0,'',0,1,''),(140,'签到记录','Signin','signmsg',135,1,'',0,1,''),
+(141,'添加','Signin/signmsg','addsignmsg',140,0,'',0,1,''),(142,'修改','Signin/signmsg','editsignmsg',140,0,'',0,1,''),
+(143,'删除','Signin/signmsg','delsignmsg',140,0,'',0,1,'');
+
+
+
+
+INSERT INTO `general_admin_permission` VALUES
+(144,'查看','Yuyue/yuyueseat','seatlist',87,0,NULL,0,1,'');
+INSERT INTO `general_admin_permission` VALUES
+(145,'违约记录','Defaults','defaultlist',18,1,'',0,1,''),(146,'添加','Defaults/defaultlist','adddefaultlist',145,0,'',0,1,''),
+(147,'修改','Defaults/defaultlist','editdefaultlist',145,0,'',0,1,''),(148,'删除','Defaults/defaultlist','deldefaultlist',145,0,'',0,1,'');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
